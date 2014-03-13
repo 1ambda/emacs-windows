@@ -1,0 +1,95 @@
+;; -*- mode: emacs-lisp; coding: emacs-mule; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Mon Mar 03 10:09:32 2014
+;; Desktop file format version 206
+;; Emacs version 24.1.1
+
+;; Global section:
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name nil)
+(setq tags-table-list nil)
+(setq search-ring nil)
+(setq regexp-search-ring nil)
+(setq register-alist '((134217848)))
+(setq file-name-history '("c:/Users/Razenrote/AppData/Roaming/.emacs.d/init" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/init/init.el" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/init/package.el" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/README.md" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/.gitignore" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/init.el" "c:/Users/Razenrote/AppData/Roaming/.emacs" "c:/Users/Razenrote/AppData/Roaming/emacs.desktop" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/history" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/cl-clib/cl-lib.el" "~/sample" "~/.emacs" "~/enc.c" "~/.emacs" "d:/emacs-24.1/bin/"))
+
+;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 206
+  "c:/Users/Razenrote/AppData/Roaming/.emacs"
+  ".emacs"
+  'emacs-lisp-mode
+  '(linum-mode semantic-show-parser-state-mode semantic-decoration-mode semantic-tag-folding-mode auto-complete-mode)
+  612
+  '(612 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . korean-iso-8bit-dos)))
+
+(desktop-create-buffer 206
+  nil
+  "Flash Player"
+  'dired-mode
+  '(linum-mode)
+  245
+  '(nil nil)
+  t
+  '("c:/Users/Razenrote/AppData/Roaming/Adobe/Flash Player/")
+  nil)
+
+(desktop-create-buffer 206
+  nil
+  "Adobe"
+  'dired-mode
+  '(linum-mode)
+  232
+  '(nil nil)
+  t
+  '("c:/Users/Razenrote/AppData/Roaming/Adobe/")
+  nil)
+
+(desktop-create-buffer 206
+  nil
+  "Razenrote"
+  'dired-mode
+  '(linum-mode)
+  1168
+  '(nil nil)
+  t
+  '("c:/Users/Razenrote/")
+  nil)
+
+(desktop-create-buffer 206
+  nil
+  "AppData"
+  'dired-mode
+  '(linum-mode)
+  333
+  '(nil nil)
+  t
+  '("c:/Users/Razenrote/AppData/")
+  nil)
+
+(desktop-create-buffer 206
+  nil
+  "AVAST Software"
+  'dired-mode
+  '(linum-mode)
+  241
+  '(nil nil)
+  t
+  '("c:/Users/Razenrote/AppData/Roaming/AVAST Software/")
+  nil)
+
+(desktop-create-buffer 206
+  nil
+  "Roaming"
+  'dired-mode
+  '(linum-mode)
+  1145
+  '(nil nil)
+  t
+  '("c:/Users/Razenrote/AppData/Roaming/")
+  nil)
+

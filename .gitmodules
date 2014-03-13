@@ -1,0 +1,15 @@
+[submodule "evil"]
+    path = evil
+    url = git://gitorious.org/evil/evil.git
+[submodule "ecb"]
+    path = ecb-2.40
+    url = git://github.com/emacsmirror/ecb.git
+[submodule "popup-el"]
+    path = popup-el
+    url = git://github.com/auto-complete/popup-el.git
+[submodule "ac-slime"]
+    path = ac-slime 
+    url = git://github.com/purcell/ac-slime.git	
+[submodule "markdown-mode"]
+    path = markdown-mode
+    url = git://jblevins.org/git/markdown-mode.git
