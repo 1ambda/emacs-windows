@@ -5,9 +5,13 @@ Emacs 24.1
 
 ### 1. How to use
 
-git clone  
+git clone https://github.com/ansterd/emacs  
 git submodule init  
-git submodule update  
+git submodule update
+```
+(load "~/.emacs.d/init/init.el") ;; add to this line in yourr ~/.emacs
+```
+
 
 
 ### 2. Contents
