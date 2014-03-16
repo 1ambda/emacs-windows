@@ -5,13 +5,20 @@
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(add-to-list 'package-archives
+	     '("marmalade" . "http://marmalade-repo.org/packages/") t)
+(setq package-enable-at-startup nil)
+(package-initialize)
 
 ;; initialize
 (iswitchb-mode)
+(setq current-language-environment "UTF-8") ;; set UTF-8
 (global-linum-mode t) ;; line-number
 (setq make-backup-files nil) ;; no backup file
 (setq auto-save-default nil) ;; no auto save
 (global-auto-revert-mode 1) ;; auto load
+(electric-pair-mode) ;; auto pair
+
 
 ;; custom key setting
 (defun reload-emacs-config ()
@@ -23,7 +30,7 @@
 (global-set-key [(control shift return)] 'semantic-ia-complete-tip)
 (global-set-key [(control c)(control return)] 'semantic-complete-analyze-inline)
 (global-set-key [(shift return)] 'semantic-analyze-possible-completions)
-;; f7 git shell
+;; f7 git shell on windows
 (when (eq system-type 'windows-nt)
   (global-set-key [(f7)]
                   '(lambda ()
@@ -31,7 +38,24 @@
                      (w32-shell-execute "open"
 					"C:\\Program Files (x86)\\Git\\bin\\sh.exe"
 					"--login -i"))))
-;; f5 run lisp script 
+;; C-/ for eclipse-like comment
+(defun comment-eclipse ()
+  (interactive)
+  (let ((start (line-beginning-position))
+	(end (line-end-position)))
+    (when (region-active-p)
+      (setq start (save-excursion
+		    (goto-char (region-beginning))
+		    (beginning-of-line)
+		    (point))
+	    end (save-excursion
+		  (goto-char (region-end))
+		  (end-of-line)
+		  (point))))
+    (comment-or-uncomment-region start end)))
+
+(global-set-key (kbd "C-/") 'comment-eclipse)
+
 
 ;; custom function
 (defun kill-other-buffers ()
@@ -105,6 +129,10 @@
 (add-to-list 'load-path "~/.emacs.d/themes")
 (require 'tomorrow-night-theme)
 
+;; yasnippet
+(require 'yasnippet)
+(yas-global-mode 1)
+
 ;; auto-complete
 ;; http://seorenn.blogspot.kr/2011/03/emacs-auto-complete-mode.html
 ;; install : http://probongster.blogspot.kr/2014/02/emacs_10.html
@@ -117,8 +145,8 @@
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/auto-complete/ac-dict")  
 
 ;; sbcl, slime
-(setq inferior-lisp-program "D:/lisp/sbcl/sbcl.exe")
-(add-to-list 'load-path "D:/lisp/slime")
+(setq inferior-lisp-program "E:/lisp/sbcl/sbcl.exe")
+(add-to-list 'load-path "C:/lisp/slime")
 (require 'slime)
 (slime-setup '(slime-repl))
 
@@ -194,3 +222,11 @@
 (setq js3-auto-indent-p t)
 (setq js3-enter-indents-newline t)
 (setq js3-indent-on-enter-key t)
+
+;; web-mode.el
+;; http://web-mode.org/
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.jsp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
