@@ -1,3 +1,10 @@
+;; location variable
+(defvar *os-platform* 'nil)
+(cond 
+    ((eq system-type 'darwin) (setf *os-platform* "osx"))
+    ((eq system-type 'windows-nt) (setf *os-platform* "windows"))
+    ((eq system-type 'gnu/linux) (setf *os-platform* "linux")))
+
 ;; language
 (set-language-environment "utf-8")
 
@@ -18,7 +25,6 @@
 (setq auto-save-default nil) ;; no auto save
 (global-auto-revert-mode 1) ;; auto load
 (electric-pair-mode) ;; auto pair
-
 
 ;; custom key setting
 (defun reload-emacs-config ()
@@ -145,8 +151,8 @@
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/auto-complete/ac-dict")  
 
 ;; sbcl, slime
-(setq inferior-lisp-program "E:/lisp/sbcl/sbcl.exe")
-(add-to-list 'load-path "C:/lisp/slime")
+(setq inferior-lisp-program "D:/lisp/sbcl/sbcl.exe")
+(add-to-list 'load-path "D:/lisp/slime")
 (require 'slime)
 (slime-setup '(slime-repl))
 
@@ -203,7 +209,8 @@
   "Toggle sr-speedbar and select"
   (interactive)
   (progn
-    (sr-speedbar-refresh)
+    (if (sr-speedbar-exist-p)
+	(sr-speedbar-refresh))
     (sr-speedbar-toggle)
     (if (sr-speedbar-exist-p)
 	(sr-speedbar-select-window))))
@@ -215,10 +222,10 @@
 (setq js3-lazy-commas t)
 (setq js3-lazy-operators t)
 (setq js3-lazy-dots t)
-(setq js3-expr-indent-offset 2)
-(setq js3-paren-indent-offset 2)
-(setq js3-square-indent-offset 2)
-(setq js3-curly-indent-offset 2)
+(setq js3-expr-indent-offset 4)
+(setq js3-paren-indent-offset 4)
+(setq js3-square-indent-offset 4)
+(setq js3-curly-indent-offset 4)
 (setq js3-auto-indent-p t)
 (setq js3-enter-indents-newline t)
 (setq js3-indent-on-enter-key t)
