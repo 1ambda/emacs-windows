@@ -19,12 +19,13 @@
 
 ;; initialize
 (iswitchb-mode)
-(setq current-language-environment "UTF-8") ;; set UTF-8
 (global-linum-mode t) ;; line-number
 (setq make-backup-files nil) ;; no backup file
 (setq auto-save-default nil) ;; no auto save
 (global-auto-revert-mode 1) ;; auto load
-(electric-pair-mode) ;; auto pair
+;; (electric-pair-mode) ;; auto pair
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
 
 ;; custom key setting
 (defun reload-emacs-config ()
@@ -116,7 +117,6 @@
 (add-to-list 'load-path "~/.emacs.d/windows")
 (require 'windows)
 (win:startup-with-window)
-;; (define-key ctl-x-map "C" 'see-you-again)
 
 ;; evil
 (add-to-list 'load-path "~/.emacs.d/evil") ;;no need with 24
@@ -142,8 +142,6 @@
 ;; auto-complete
 ;; http://seorenn.blogspot.kr/2011/03/emacs-auto-complete-mode.html
 ;; install : http://probongster.blogspot.kr/2014/02/emacs_10.html
-;; (add-to-list 'load-path "~/.emacs.d/cl-lib")
-;; (require 'cl-lib)
 (add-to-list 'load-path "~/.emacs.d/popup-el")
 (add-to-list 'load-path "~/.emacs.d/auto-complete")  
 (require 'auto-complete-config)
@@ -154,6 +152,7 @@
 (setq inferior-lisp-program "D:/lisp/sbcl/sbcl.exe")
 (add-to-list 'load-path "D:/lisp/slime")
 (require 'slime)
+(setq slime-net-coding-system 'utf-8-unix)
 (slime-setup '(slime-repl))
 
 ;; lisp auto indent
@@ -237,3 +236,4 @@
 (add-to-list 'auto-mode-alist '("\\.jsp\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+

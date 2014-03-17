@@ -2,7 +2,7 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Mon Mar 17 21:45:51 2014
+;; Created Tue Mar 18 01:49:37 2014
 ;; Desktop file format version 206
 ;; Emacs version 24.3.1
 
@@ -11,63 +11,30 @@
 (setq tags-file-name nil)
 (setq tags-table-list nil)
 (setq search-ring nil)
-(setq regexp-search-ring '("(" "name" "A" "theme" "save" "slime-repl-mode" "amp" "amphh" "hook" "slime-repl-mode-map" "map" "=" "ecb"))
+(setq regexp-search-ring '("4" "ya" "indent" "2" "ini" "ya" "tab" "t" "js" "(" "name" "A" "theme" "save" "slime-repl-mode" "amp"))
 (setq register-alist '((127) (27) (24) (134217848)))
-(setq file-name-history '("c:/Users/Razenrote/AppData/Roaming/.emacs.d/init/init.el" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/.gitignore" "c:/lisp/practicalcommon8.lisp" "c:/lisp/practicalcommon9.lisp" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/README.md" "c:/Users/Razenrote/AppData/Roaming/.emacs" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/.gitmodules" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/init/init.el" "c:/Lisp/practicalcommon3.lisp" "c:/Lisp/landof6.lisp" "c:/Lisp/practicalcommon3.lisp" "c:/Lisp/landof.lisp" "c:/Lisp/test.lisp" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/init/init.el" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/README.html" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/elpa/js3-mode-20130904.1444/js3.el" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/elpa/js3-mode-20130904.1444/js3.elc" "c:/github/nobus/app.js" "c:/github/nobus/public/javascripts/project.js" "c:/github/nobus/public/javascripts/index.js" "~/.emacs.d/js3-mode/js3-mode.el" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/js3-mode/js3.elc" "~/.emacs.d/js3-mode/js3.el" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/js3-mode/js3.el" "c:/github/nobus/public/javascripts/welcome.js" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/cedet-1.1/cedet-devel-load.el" "~/.emacs.d/" "c:/Lisp/test.lisp" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/init/init.el" "c:/Lisp/test.lisp"))
+(setq file-name-history '("c:/Users/Razenrote/AppData/Roaming/.emacs.d/init/init.el" "c:/github/neo-clsp/collector.lisp" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/init/init.el" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/.gitignore" "c:/lisp/practicalcommon8.lisp" "c:/lisp/practicalcommon9.lisp" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/README.md" "c:/Users/Razenrote/AppData/Roaming/.emacs" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/.gitmodules" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/init/init.el" "c:/Lisp/practicalcommon3.lisp" "c:/Lisp/landof6.lisp" "c:/Lisp/practicalcommon3.lisp" "c:/Lisp/landof.lisp" "c:/Lisp/test.lisp" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/init/init.el" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/README.html" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/elpa/js3-mode-20130904.1444/js3.el" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/elpa/js3-mode-20130904.1444/js3.elc" "c:/github/nobus/app.js" "c:/github/nobus/public/javascripts/project.js" "c:/github/nobus/public/javascripts/index.js" "~/.emacs.d/js3-mode/js3-mode.el" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/js3-mode/js3.elc" "~/.emacs.d/js3-mode/js3.el" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/js3-mode/js3.el" "c:/github/nobus/public/javascripts/welcome.js" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/cedet-1.1/cedet-devel-load.el" "~/.emacs.d/" "c:/Lisp/test.lisp"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 206
+  "c:/github/neo-clsp/collector.lisp"
+  "collector.lisp"
+  'lisp-mode
+  '(linum-mode global-auto-revert-mode yas-minor-mode auto-complete-mode)
+  296
+  '(181 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-dos)))
+
 (desktop-create-buffer 206
   "c:/Users/Razenrote/AppData/Roaming/.emacs.d/init/init.el"
   "init.el"
   'emacs-lisp-mode
   '(linum-mode global-auto-revert-mode yas-minor-mode auto-complete-mode)
-  5103
-  '(5054 nil)
+  6744
+  '(6027 nil)
   nil
   nil
-  '((buffer-file-coding-system . undecided-dos)))
-
-(desktop-create-buffer 206
-  "c:/Users/Razenrote/AppData/Roaming/.emacs.d/.gitignore"
-  ".gitignore"
-  'fundamental-mode
-  '(linum-mode global-auto-revert-mode yas-minor-mode)
-  119
-  '(119 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . undecided-dos)))
-
-(desktop-create-buffer 206
-  "c:/lisp/practicalcommon8.lisp"
-  "practicalcommon8.lisp"
-  'lisp-mode
-  '(linum-mode global-auto-revert-mode yas-minor-mode auto-complete-mode)
-  461
-  '(461 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . utf-8-dos)))
-
-(desktop-create-buffer 206
-  "c:/lisp/practicalcommon9.lisp"
-  "practicalcommon9.lisp"
-  'lisp-mode
-  '(linum-mode global-auto-revert-mode yas-minor-mode auto-complete-mode)
-  294
-  '(294 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . utf-8-dos)))
-
-(desktop-create-buffer 206
-  "c:/lisp/practicalcommon3.lisp"
-  "practicalcommon3.lisp"
-  'lisp-mode
-  '(linum-mode global-auto-revert-mode yas-minor-mode auto-complete-mode)
-  1755
-  '(1755 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . undecided-dos)))
+  '((tab-width . 4) (indent-tabs-mode) (buffer-file-coding-system . undecided-dos)))
 
