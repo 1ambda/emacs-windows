@@ -2,7 +2,7 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Thu Mar 13 17:08:31 2014
+;; Created Mon Mar 17 05:43:07 2014
 ;; Desktop file format version 206
 ;; Emacs version 24.3.1
 
@@ -11,18 +11,40 @@
 (setq tags-file-name nil)
 (setq tags-table-list nil)
 (setq search-ring nil)
-(setq regexp-search-ring '("name" "A" "theme" "save" "slime-repl-mode" "amp" "amphh" "hook" "slime-repl-mode-map" "map" "=" "ecb"))
-(setq register-alist '((27) (24) (134217848)))
-(setq file-name-history '("c:/Lisp/practicalcommon3.lisp" "c:/Lisp/landof6.lisp" "c:/Lisp/practicalcommon3.lisp" "c:/Lisp/landof.lisp" "c:/Lisp/test.lisp" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/init/init.el" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/README.html" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/elpa/js3-mode-20130904.1444/js3.el" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/elpa/js3-mode-20130904.1444/js3.elc" "c:/github/nobus/app.js" "c:/github/nobus/public/javascripts/project.js" "c:/github/nobus/public/javascripts/index.js" "~/.emacs.d/js3-mode/js3-mode.el" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/js3-mode/js3.elc" "~/.emacs.d/js3-mode/js3.el" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/js3-mode/js3.el" "c:/github/nobus/public/javascripts/welcome.js" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/cedet-1.1/cedet-devel-load.el" "~/.emacs.d/" "c:/Lisp/test.lisp" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/init/init.el" "c:/Lisp/test.lisp" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/init/init.el" "c:/Lisp/test.el" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/init/init.el" "c:/Users/Razenrote/AppData/Roaming/.emacs" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/README.md" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/.gitmodules" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/init/init.el" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/ac-slime/ac-slime.el"))
+(setq regexp-search-ring '("(" "name" "A" "theme" "save" "slime-repl-mode" "amp" "amphh" "hook" "slime-repl-mode-map" "map" "=" "ecb"))
+(setq register-alist '((127) (27) (24) (134217848)))
+(setq file-name-history '("c:/lisp/practicalcommon8.lisp" "c:/lisp/practicalcommon9.lisp" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/README.md" "c:/Users/Razenrote/AppData/Roaming/.emacs" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/.gitmodules" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/init/init.el" "c:/Lisp/practicalcommon3.lisp" "c:/Lisp/landof6.lisp" "c:/Lisp/practicalcommon3.lisp" "c:/Lisp/landof.lisp" "c:/Lisp/test.lisp" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/init/init.el" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/README.html" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/elpa/js3-mode-20130904.1444/js3.el" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/elpa/js3-mode-20130904.1444/js3.elc" "c:/github/nobus/app.js" "c:/github/nobus/public/javascripts/project.js" "c:/github/nobus/public/javascripts/index.js" "~/.emacs.d/js3-mode/js3-mode.el" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/js3-mode/js3.elc" "~/.emacs.d/js3-mode/js3.el" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/js3-mode/js3.el" "c:/github/nobus/public/javascripts/welcome.js" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/cedet-1.1/cedet-devel-load.el" "~/.emacs.d/" "c:/Lisp/test.lisp" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/init/init.el" "c:/Lisp/test.lisp" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/init/init.el" "c:/Lisp/test.el"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 206
+  "c:/lisp/practicalcommon8.lisp"
+  "practicalcommon8.lisp"
+  'lisp-mode
+  '(linum-mode global-auto-revert-mode auto-complete-mode slime-mode)
+  461
+  '(190 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-dos)))
+
+(desktop-create-buffer 206
+  "c:/lisp/practicalcommon9.lisp"
+  "practicalcommon9.lisp"
+  'lisp-mode
+  '(linum-mode global-auto-revert-mode auto-complete-mode slime-mode)
+  294
+  '(294 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-dos)))
+
 (desktop-create-buffer 206
   "c:/lisp/practicalcommon3.lisp"
   "practicalcommon3.lisp"
   'lisp-mode
   '(linum-mode global-auto-revert-mode auto-complete-mode slime-mode)
-  1177
-  '(1176 nil)
+  1755
+  '(1755 nil)
   nil
   nil
   '((buffer-file-coding-system . undecided-dos)))
