@@ -1,3 +1,10 @@
+;; location variable
+(defvar *os-platform* 'nil)
+(cond 
+    ((eq system-type 'darwin) (setf *os-platform* "osx"))
+    ((eq system-type 'windows-nt) (setf *os-platform* "windows"))
+    ((eq system-type 'gnu/linux) (setf *os-platform* "linux")))
+
 ;; language
 (set-language-environment "utf-8")
 
@@ -6,19 +13,21 @@
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'package-archives
-	     '("marmalade" . "http://marmalade-repo.org/packages/") t)
+             '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (setq package-enable-at-startup nil)
 (package-initialize)
 
 ;; initialize
 (iswitchb-mode)
-(setq current-language-environment "UTF-8") ;; set UTF-8
 (global-linum-mode t) ;; line-number
 (setq make-backup-files nil) ;; no backup file
 (setq auto-save-default nil) ;; no auto save
 (global-auto-revert-mode 1) ;; auto load
-(electric-pair-mode) ;; auto pair
+(electric-indent-mode 1) ;; auto indent
+(defalias 'yes-or-no-p 'y-or-n-p) ;; convert yes-or-no-p into y-or-n-p
 
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
 
 ;; custom key setting
 (defun reload-emacs-config ()
@@ -56,6 +65,11 @@
 
 (global-set-key (kbd "C-/") 'comment-eclipse)
 
+;; custom key setting using "C-c"
+(global-set-key (kbd "C-c E")
+                (lambda ()
+                  (interactive)
+                  (find-file "~/.emacs.d/init/init.el")))
 
 ;; custom function
 (defun kill-other-buffers ()
@@ -110,7 +124,6 @@
 (add-to-list 'load-path "~/.emacs.d/windows")
 (require 'windows)
 (win:startup-with-window)
-;; (define-key ctl-x-map "C" 'see-you-again)
 
 ;; evil
 (add-to-list 'load-path "~/.emacs.d/evil") ;;no need with 24
@@ -132,27 +145,54 @@
 ;; yasnippet
 (require 'yasnippet)
 (yas-global-mode 1)
+(define-key yas-minor-mode-map (kbd "<tab>") nil)
+(define-key yas-minor-mode-map (kbd "TAB") nil)
+(define-key yas-minor-mode-map (kbd "S-<tab>") 'yas-expand)
+(defun yas-ido-expand ()
+  "Lets you select (and expand) a yasnippet key"
+  (interactive)
+    (let ((original-point (point)))
+      (while (and
+              (not (= (point) (point-min) ))
+              (not
+               (string-match "[[:space:]\n]" (char-to-string (char-before)))))
+        (backward-word 1))
+    (let* ((init-word (point))
+           (word (buffer-substring init-word original-point))
+           (list (yas-active-keys)))
+      (goto-char original-point)
+      (let ((key (remove-if-not
+                  (lambda (s) (string-match (concat "^" word) s)) list)))
+        (if (= (length key) 1)
+            (setq key (pop key))
+          (setq key (ido-completing-read "key: " list nil nil word)))
+        (delete-char (- init-word original-point))
+        (insert key)
+        (yas-expand)))))
+(define-key yas-minor-mode-map (kbd "<C-tab>")     'yas-ido-expand)
+
+
 
 ;; auto-complete
 ;; http://seorenn.blogspot.kr/2011/03/emacs-auto-complete-mode.html
 ;; install : http://probongster.blogspot.kr/2014/02/emacs_10.html
-;; (add-to-list 'load-path "~/.emacs.d/cl-lib")
-;; (require 'cl-lib)
 (add-to-list 'load-path "~/.emacs.d/popup-el")
 (add-to-list 'load-path "~/.emacs.d/auto-complete")  
 (require 'auto-complete-config)
 (ac-config-default)  
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/auto-complete/ac-dict")  
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/auto-complete/ac-dict")
+
 
 ;; sbcl, slime
-(setq inferior-lisp-program "E:/lisp/sbcl/sbcl.exe")
-(add-to-list 'load-path "C:/lisp/slime")
+(setq inferior-lisp-program "D:/lisp/sbcl/sbcl.exe")
+(add-to-list 'load-path "D:/lisp/slime")
 (require 'slime)
+(setq slime-net-coding-system 'utf-8-unix)
 (slime-setup '(slime-repl))
 
 ;; lisp auto indent
-(define-key emacs-lisp-mode-map (kbd "RET") 'newline-and-indent)
-(define-key lisp-mode-map (kbd "RET") 'newline-and-indent)
+;; (define-key emacs-lisp-mode-map (kbd "RET") 'newline-and-indent) 
+;; (define-key lisp-mode-map (kbd "RET") 'newline-and-indent)
 
 ;; lisp compile key
 ;; http://www.gnu.org/software/emacs/manual/html_node/elisp/Formatting-Strings.html
@@ -203,7 +243,8 @@
   "Toggle sr-speedbar and select"
   (interactive)
   (progn
-    (sr-speedbar-refresh)
+    (if (sr-speedbar-exist-p)
+	(sr-speedbar-refresh))
     (sr-speedbar-toggle)
     (if (sr-speedbar-exist-p)
 	(sr-speedbar-select-window))))
@@ -215,10 +256,10 @@
 (setq js3-lazy-commas t)
 (setq js3-lazy-operators t)
 (setq js3-lazy-dots t)
-(setq js3-expr-indent-offset 2)
-(setq js3-paren-indent-offset 2)
-(setq js3-square-indent-offset 2)
-(setq js3-curly-indent-offset 2)
+(setq js3-expr-indent-offset 4)
+(setq js3-paren-indent-offset 4)
+(setq js3-square-indent-offset 4)
+(setq js3-curly-indent-offset 4)
 (setq js3-auto-indent-p t)
 (setq js3-enter-indents-newline t)
 (setq js3-indent-on-enter-key t)
@@ -230,3 +271,15 @@
 (add-to-list 'auto-mode-alist '("\\.jsp\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+
+;; autopair except where you are in interpreter such as slime
+;; https://github.com/capitaomorte/autopair
+(add-to-list 'load-path "~/.emacs.d/autopair")
+(require 'autopair)
+(autopair-global-mode)
+(add-hook 'slime-repl-mode-hook
+          #'(lambda ()
+              (setq autopair-dont-activate t)
+              (autopair-mode -1)))
+
+
