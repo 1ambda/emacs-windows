@@ -6,3 +6,5 @@ ac-comphist.dat
 .emacs.desktop
 .emacs.desktop.lock
 eshell/lastdir
+lastdir
+whsettings
