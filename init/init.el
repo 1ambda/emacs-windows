@@ -26,7 +26,6 @@
 (electric-indent-mode 1) ;; auto indent
 (defalias 'yes-or-no-p 'y-or-n-p) ;; convert yes-or-no-p into y-or-n-p
 
-
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 

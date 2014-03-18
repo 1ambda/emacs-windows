@@ -2,7 +2,7 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Tue Mar 18 13:13:45 2014
+;; Created Tue Mar 18 13:18:15 2014
 ;; Desktop file format version 206
 ;; Emacs version 24.3.1
 
@@ -21,20 +21,9 @@
   "init.el"
   'emacs-lisp-mode
   '(linum-mode global-auto-revert-mode yas-minor-mode auto-complete-mode autopair-mode)
-  2325
-  '(1414 nil)
+  1778
+  '(1120 nil)
   nil
   nil
-  '((tab-width . 4) (indent-tabs-mode) (buffer-file-coding-system . undecided-dos)))
-
-(desktop-create-buffer 206
-  "d:/emacs-24.3/lisp/gnus/auth-source.el"
-  "auth-source.el"
-  'emacs-lisp-mode
-  '(linum-mode global-auto-revert-mode yas-minor-mode auto-complete-mode autopair-mode)
-  65
-  '(nil nil)
-  nil
-  nil
-  '((show-trailing-whitespace . t) (buffer-file-coding-system . undecided-unix)))
+  '((buffer-file-coding-system . undecided-dos)))
 
