@@ -2,7 +2,7 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Tue Mar 18 01:49:37 2014
+;; Created Tue Mar 18 13:13:45 2014
 ;; Desktop file format version 206
 ;; Emacs version 24.3.1
 
@@ -11,30 +11,30 @@
 (setq tags-file-name nil)
 (setq tags-table-list nil)
 (setq search-ring nil)
-(setq regexp-search-ring '("4" "ya" "indent" "2" "ini" "ya" "tab" "t" "js" "(" "name" "A" "theme" "save" "slime-repl-mode" "amp"))
+(setq regexp-search-ring '("slime-mode" "slime-mode-hook" "hook" "initial" "<tab" "initial" "ya" "electric" "ac-con" "electric" "elec" "ya" "4" "ya" "indent" "2"))
 (setq register-alist '((127) (27) (24) (134217848)))
 (setq file-name-history '("c:/Users/Razenrote/AppData/Roaming/.emacs.d/init/init.el" "c:/github/neo-clsp/collector.lisp" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/init/init.el" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/.gitignore" "c:/lisp/practicalcommon8.lisp" "c:/lisp/practicalcommon9.lisp" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/README.md" "c:/Users/Razenrote/AppData/Roaming/.emacs" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/.gitmodules" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/init/init.el" "c:/Lisp/practicalcommon3.lisp" "c:/Lisp/landof6.lisp" "c:/Lisp/practicalcommon3.lisp" "c:/Lisp/landof.lisp" "c:/Lisp/test.lisp" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/init/init.el" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/README.html" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/elpa/js3-mode-20130904.1444/js3.el" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/elpa/js3-mode-20130904.1444/js3.elc" "c:/github/nobus/app.js" "c:/github/nobus/public/javascripts/project.js" "c:/github/nobus/public/javascripts/index.js" "~/.emacs.d/js3-mode/js3-mode.el" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/js3-mode/js3.elc" "~/.emacs.d/js3-mode/js3.el" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/js3-mode/js3.el" "c:/github/nobus/public/javascripts/welcome.js" "c:/Users/Razenrote/AppData/Roaming/.emacs.d/cedet-1.1/cedet-devel-load.el" "~/.emacs.d/" "c:/Lisp/test.lisp"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
 (desktop-create-buffer 206
-  "c:/github/neo-clsp/collector.lisp"
-  "collector.lisp"
-  'lisp-mode
-  '(linum-mode global-auto-revert-mode yas-minor-mode auto-complete-mode)
-  296
-  '(181 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . utf-8-dos)))
-
-(desktop-create-buffer 206
   "c:/Users/Razenrote/AppData/Roaming/.emacs.d/init/init.el"
   "init.el"
   'emacs-lisp-mode
-  '(linum-mode global-auto-revert-mode yas-minor-mode auto-complete-mode)
-  6744
-  '(6027 nil)
+  '(linum-mode global-auto-revert-mode yas-minor-mode auto-complete-mode autopair-mode)
+  2325
+  '(1414 nil)
   nil
   nil
   '((tab-width . 4) (indent-tabs-mode) (buffer-file-coding-system . undecided-dos)))
+
+(desktop-create-buffer 206
+  "d:/emacs-24.3/lisp/gnus/auth-source.el"
+  "auth-source.el"
+  'emacs-lisp-mode
+  '(linum-mode global-auto-revert-mode yas-minor-mode auto-complete-mode autopair-mode)
+  65
+  '(nil nil)
+  nil
+  nil
+  '((show-trailing-whitespace . t) (buffer-file-coding-system . undecided-unix)))
 
