@@ -1,12 +1,20 @@
 ;; location variable
-(defvar *os-platform* 'nil)
-(cond 
-    ((eq system-type 'darwin) (setf *os-platform* "osx"))
-    ((eq system-type 'windows-nt) (setf *os-platform* "windows"))
-    ((eq system-type 'gnu/linux) (setf *os-platform* "linux")))
+(cond
+ ((setq os-windows-p (eq system-type 'windows-nt)))
+ ((setq os-linux-p (eq system-type 'gnu/linux)))
+ ((setq os-mac-p (eq-system-type 'darwin))))
 
 ;; language
 (set-language-environment "utf-8")
+(setq-default coding-system 'utf-8)
+(setq-default buffer-file-coding-system 'utf-8)
+(setq-default buffer-coding-system 'utf-8)
+(setq-default file-name-coding-system 'utf-8)
+(setq-default senmail-coding-system 'utf-8)
+(setq file-coding-system 'utf-8)
+(setq sendmail-coding-system 'utf-8)
+(setq terminal-coding-system 'utf-8)
+(setq shell-coding-system 'utf-8)
 
 ;; package
 (require 'package)
@@ -29,6 +37,7 @@
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 
+
 ;; custom key setting
 (defun reload-emacs-config ()
   (interactive)
@@ -40,7 +49,7 @@
 (global-set-key [(control c)(control return)] 'semantic-complete-analyze-inline)
 (global-set-key [(shift return)] 'semantic-analyze-possible-completions)
 ;; f7 git shell on windows
-(when (eq system-type 'windows-nt)
+(when os-windows-p
   (global-set-key [(f7)]
                   '(lambda ()
                      (interactive)
@@ -225,7 +234,17 @@
 (add-to-list 'load-path "~/.emacs.d/markdown-mode")
 (autoload 'markdown-mode "markdown-mode"
    "Major mode for editing Markdown files" t)
+(setq markdown-command "perl ~/.emacs.d/markdown/Markdown.pl"
+      markdown-content-type "text/html"
+      markdown-css-path "style.css"
+      markdown-coding-system 'utf-8)
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+(add-hook 'markdown-mode-hook
+          (lambda ()
+            (define-key markdown-mode-map (kbd "M-<up>") nil)
+            (define-key markdown-mode-map (kbd "M-<down>") nil)
+            (define-key markdown-mode-map (kbd "M-<left>") nil)
+            (define-key markdown-mode-map (kbd "M-<right>") nil)))
 
 ;; slime custom key binding
 (add-hook 'markdown-mode-hook '(lambda ()
