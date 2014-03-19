@@ -184,8 +184,8 @@
 
 
 ;; sbcl, slime
-(setq inferior-lisp-program "D:/lisp/sbcl/sbcl.exe")
-(add-to-list 'load-path "D:/lisp/slime")
+(setq inferior-lisp-program "C:/lisp/sbcl/sbcl.exe")
+(add-to-list 'load-path "C:/lisp/slime")
 (require 'slime)
 (setq slime-net-coding-system 'utf-8-unix)
 (slime-setup '(slime-repl))
