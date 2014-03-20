@@ -37,7 +37,6 @@
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 
-
 ;; custom key setting
 (defun reload-emacs-config ()
   (interactive)
