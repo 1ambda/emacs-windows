@@ -1,5 +1,3 @@
-
-  
 ;; location variable
 (cond
  ((setq os-windows-p (eq system-type 'windows-nt)))
@@ -38,7 +36,6 @@
 
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
-
 
 ;; custom key setting
 (defun reload-emacs-config ()
@@ -251,7 +248,6 @@
 (defadvice markdown-export (around set-temp-path-for-exported-file activate)
   (ad-set-arg 0 (format "%s/%s" "~/.emacs.d/temp-dir" (file-name-nondirectory buffer-file-name)))
   ad-do-it)
-
 
 ;; slime custom key binding
 (add-hook 'markdown-mode-hook '(lambda ()
