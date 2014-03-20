@@ -1,3 +1,5 @@
+
+  
 ;; location variable
 (cond
  ((setq os-windows-p (eq system-type 'windows-nt)))
@@ -244,6 +246,11 @@
             (define-key markdown-mode-map (kbd "M-<down>") nil)
             (define-key markdown-mode-map (kbd "M-<left>") nil)
             (define-key markdown-mode-map (kbd "M-<right>") nil)))
+;; save exported HTML into temp directory
+(defadvice markdown-export (around set-temp-path-for-exported-file activate)
+  (ad-set-arg 0 (format "%s/%s" "~/.emacs.d/temp-dir" (file-name-nondirectory buffer-file-name)))
+  ad-do-it)
+
 
 ;; slime custom key binding
 (add-hook 'markdown-mode-hook '(lambda ()
@@ -300,4 +307,18 @@
               (setq autopair-dont-activate t)
               (autopair-mode -1)))
 
+;; IRC
+(defun irc-start ()
+   "Connect to IRC."
+   (interactive)
+   (erc :server "irc.freenode.net" :port 6667 :nick "anster" :full-name "razenrote")
+   (setq erc-autojoin-channels-alist '(("freenode.net" "#emacs" "#clnoobs" "#lisp")))
+   (setq erc-interpret-mirc-color t)
+   (setq erc-hide-list '("JOIN" "PART" "QUIT")))
 
+;; test area
+(defun my-test-function (&optional file-name)
+  (interactive)
+  (message "%s" file-name))
+  ;; (message "%s" (file-name-nondirectory buffer-file-name)))
+(global-set-key (kbd "C-c p") 'my-test-function)
