@@ -319,3 +319,5 @@
   (message "%s" file-name))
   ;; (message "%s" (file-name-nondirectory buffer-file-name)))
 (global-set-key (kbd "C-c p") 'my-test-function)
+
+
