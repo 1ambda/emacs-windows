@@ -221,10 +221,12 @@
 (ac-config-default)  
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/auto-complete/ac-dict")
 
-
 ;; sbcl, slime
-(setq inferior-lisp-program "C:/lisp/sbcl/sbcl.exe")
-(add-to-list 'load-path "C:/lisp/slime")
+(cond (os-windows-p (progn (setq inferior-lisp-program "C:/lisp/sbcl/sbcl.exe")
+			   (add-to-list 'load-path "C:/lisp/slime")))
+      (os-linux-p (progn (setq inferior-lisp-program "sbcl")
+			 (load (expand-file-name "~/quicklisp/slime-helper.el")))))
+
 (require 'slime)
 (setq slime-net-coding-system 'utf-8-unix)
 (slime-setup '(slime-repl))
