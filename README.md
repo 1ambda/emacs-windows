@@ -1,7 +1,7 @@
-Emacs 24.1
+Emacs 24.3 on Windows 7
 ===
 
-2014.03.03
+2014.03.24
 
 ### 1. How to use
 
