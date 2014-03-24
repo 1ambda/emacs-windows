@@ -34,7 +34,7 @@ git submodule update
 
 
 ### 3. OS dependent config
-
+```
 (cond
  ((setq os-windows-p (eq system-type 'windows-nt)))
  ((setq os-linux-p (eq system-type 'gnu/linux)))
@@ -54,6 +54,6 @@ git submodule update
 			                     (add-to-list 'load-path "C:/lisp/slime")))
       (os-linux-p (progn (setq inferior-lisp-program "sbcl")
 			                   (load (expand-file-name "~/quicklisp/slime-helper.el")))))	
-
+```
 
 By. Anster
