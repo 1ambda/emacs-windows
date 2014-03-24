@@ -21,7 +21,15 @@ git submodule update
 - evil
 - auto-complete
 - ac-slime
-- zenburn them
+- zenburn theme
+- emmet-mode
+- web-mode
+- ido
+- windmove
+- yasnippet
+- markdown-mode
+- js3-mode
+- auto-pair
 
 
 

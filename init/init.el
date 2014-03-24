@@ -319,14 +319,6 @@
    (setq erc-interpret-mirc-color t)
    (setq erc-hide-list '("JOIN" "PART" "QUIT")))
 
-;; test area
-(defun my-test-function (&optional file-name)
-  (interactive)
-  (message "%s" file-name))
-  ;; (message "%s" (file-name-nondirectory buffer-file-name)))
-(global-set-key (kbd "C-c p") 'my-test-function)
-
-
 ;; emmet : enhanced zencoding
 ;; https://github.com/smihica/emmet-mode
 (add-to-list 'load-path "~/.emacs.d/emmet-mode")
@@ -334,6 +326,14 @@
 (setq emmet-preview-default nil)
 (add-hook 'sgml-mode-hook 'emmet-mode)
 (add-hook 'css-mode-hook 'emmet-mode)
+
+;; test area
+(defun my-test-function (&optional file-name)
+  (interactive)
+  (message "%s" file-name))
+  ;; (message "%s" (file-name-nondirectory buffer-file-name)))
+(global-set-key (kbd "C-c p") 'my-test-function)
+
 
 
 
