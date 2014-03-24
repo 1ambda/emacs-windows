@@ -12,8 +12,6 @@ git submodule update
 (load "~/.emacs.d/init/init.el") ;; add to this line in yourr ~/.emacs
 ```
 
-
-
 ### 2. Contents
 
 - cedet 1.1

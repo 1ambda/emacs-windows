@@ -74,6 +74,8 @@
 (global-set-key (kbd "C-/") 'comment-eclipse)
 
 ;; custom key setting using "C-c"
+(global-set-key (kbd "C-c S") 'create-custom-snippet)        ;; create snippet of current mode
+(global-set-key (kbd "C-c s") 'reload-current-mode-snippets) ;; loading all snippets
 (global-set-key (kbd "C-c E")
                 (lambda ()
                   (interactive)
@@ -184,8 +186,31 @@
         (insert key)
         (yas-expand)))))
 (define-key yas-minor-mode-map (kbd "<C-tab>")     'yas-ido-expand)
+;; create my custom snippet in "~/.emacs.d/snippets" based on major mode
+;; key binding : C-c S
+(setq *new-snippet-content*
+"# name: 
+# key: 
+# --
+")
 
+(defun create-custom-snippet (snippet-name)
+  (interactive "sSnippet name : ")
+  (if (not (file-directory-p "~/.emacs.d/snippets"))
+      (make-directory "~/.emacs.d/snippetes"))
+  (if (not (file-directory-p (format "~/.emacs.d/snippets/%s" major-mode)))
+      (make-directory (format "~/.emacs.d/snippets/%s" major-mode)))
+  (let ((file-name (format "~/.emacs.d/snippets/%s/%s" major-mode snippet-name)))
+    (if (file-exists-p file-name)
+        (message "The snippet already exists")
+      (progn (write-region *new-snippet-content* nil file-name)
+             (switch-to-buffer (find-file-noselect file-name))))))
 
+;; load all snippets 
+;; key binding : C-c s
+(defun reload-current-mode-snippets ()
+  (interactive)
+  (yas-reload-all))
 
 ;; auto-complete
 ;; http://seorenn.blogspot.kr/2011/03/emacs-auto-complete-mode.html
@@ -334,7 +359,11 @@
   ;; (message "%s" (file-name-nondirectory buffer-file-name)))
 (global-set-key (kbd "C-c p") 'my-test-function)
 
+(defun test-minibuffer-function (text)
+  (interactive "sEnter friend's name :")
+  (message "Name: %s" test))
 
-
-
+(defun get-current-major-mode ()
+  (interactive)
+  (message (concat "Hello" (format "%s" major-mode))))
 
