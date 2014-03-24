@@ -151,8 +151,14 @@
 (require 'tomorrow-night-theme)
 
 ;; yasnippet
+(add-to-list 'load-path
+             "~/.emacs.d/yasnippet")
 (require 'yasnippet)
+(setq yas/snippet-dirs '("~/.emacs.d/elpa/yasnippet-20140314.255/snippets"
+                         "~/.emacs.d/snippets"))
+(add-hook 'html-mode-hook #'(lambda () (set (make-local-variable 'yas-extra-modes) 'web-mode)))
 (yas-global-mode 1)
+(yas-reload-all 1)
 (define-key yas-minor-mode-map (kbd "<tab>") nil)
 (define-key yas-minor-mode-map (kbd "TAB") nil)
 (define-key yas-minor-mode-map (kbd "S-<tab>") 'yas-expand)
@@ -209,6 +215,7 @@
   (save-buffer)
   (defvar lisp-file-name nil)
   (setq lisp-file-name buffer-file-name))
+
 
 (define-key lisp-mode-map (kbd "<f5>") 'save-lisp-file)
 (define-key emacs-lisp-mode-map (kbd "<f5>") 'save-lisp-file)
@@ -292,7 +299,6 @@
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.jsp\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 
 ;; autopair except where you are in interpreter such as slime
 ;; https://github.com/capitaomorte/autopair
@@ -319,5 +325,16 @@
   (message "%s" file-name))
   ;; (message "%s" (file-name-nondirectory buffer-file-name)))
 (global-set-key (kbd "C-c p") 'my-test-function)
+
+
+;; emmet : enhanced zencoding
+;; https://github.com/smihica/emmet-mode
+(add-to-list 'load-path "~/.emacs.d/emmet-mode")
+(require 'emmet-mode)
+(setq emmet-preview-default nil)
+(add-hook 'sgml-mode-hook 'emmet-mode)
+(add-hook 'css-mode-hook 'emmet-mode)
+
+
 
 

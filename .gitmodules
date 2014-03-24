@@ -13,3 +13,7 @@
 [submodule "markdown-mode"]
     path = markdown-mode
     url = git://jblevins.org/git/markdown-mode.git
+[submodule "emmet-mode"]
+    path = emmet-mode
+    url = git://github.com/smihica/emmet-mode.git
+ 

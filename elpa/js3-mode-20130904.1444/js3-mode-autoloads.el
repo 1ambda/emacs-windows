@@ -3,7 +3,7 @@
 ;;; Code:
 
 
-;;;### (autoloads (js3-mode) "js3" "js3.el" (21287 1896 0 0))
+;;;### (autoloads (js3-mode) "js3" "js3.el" (21294 16997 0 0))
 ;;; Generated autoloads from js3.el
  (add-to-list 'auto-mode-alist '("\\.js$" . js3-mode))
 
@@ -16,7 +16,7 @@ Major mode for editing JavaScript code.
 
 ;;;***
 
-;;;### (autoloads (js3-mode) "js3-mode" "js3-mode.el" (21287 1896
+;;;### (autoloads (js3-mode) "js3-mode" "js3-mode.el" (21294 16997
 ;;;;;;  0 0))
 ;;; Generated autoloads from js3-mode.el
  (add-to-list 'auto-mode-alist '("\\.js$" . js3-mode))
@@ -30,7 +30,7 @@ Major mode for editing JavaScript code.
 
 ;;;***
 
-;;;### (autoloads nil nil ("js3-mode-pkg.el") (21287 1896 681000
+;;;### (autoloads nil nil ("js3-mode-pkg.el") (21294 16997 77000
 ;;;;;;  0))
 
 ;;;***
