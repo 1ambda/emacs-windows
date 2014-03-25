@@ -1,3 +1,4 @@
+
 ;; location variable
 (cond
  ((setq os-windows-p (eq system-type 'windows-nt)))
@@ -33,9 +34,14 @@
 (global-auto-revert-mode 1) ;; auto load
 (electric-indent-mode 1) ;; auto indent
 (defalias 'yes-or-no-p 'y-or-n-p) ;; convert yes-or-no-p into y-or-n-p
+;; (global-hl-line-mode 1)
 
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
+
+;; font face
+(set-face-foreground 'highlight "eaeaea")
+(set-face-background 'highlight "424242")
 
 ;; custom key setting
 (defun reload-emacs-config ()
@@ -95,7 +101,6 @@
 
 ;; cedet
 (load "~/.emacs.d/cedet-1.1/cedet-devel-load.el")
-;; (load "~/.emacs.d/cedet-1.1/contrib/cedet-contrib-load.el")
 (add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
 (add-to-list 'semantic-default-submodes 'global-cedet-m3-minor-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
@@ -105,15 +110,16 @@
 (add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-decoration-mode)
 
-(semantic-mode 1)
-(require 'semantic/ia)
 
 ;; cedet semantic
+(semantic-mode 1)
+(require 'semantic/ia)
 (semantic-load-enable-excessive-code-helpers)
 (global-semantic-show-parser-state-mode 1)
 ;; (setq semantic-python-dependency-system-include-path
 ;;      '("/usr/lib/python2.7/")) 
 (global-semanticdb-minor-mode 1)
+;; (global-semantic-tag-folding-mode 1)
 (setq semanticdb-default-system-save-directory
       (setq semanticdb-default-save-directory "~/.emacs.d/semanticdb"))
 
@@ -121,12 +127,14 @@
 (add-to-list 'load-path "~/.emacs.d/ecb-2.40")
 (require 'ecb)
 ;; customize the keys for ECB
+(setq ecb-tip-of-the-day nil)
 (define-key ecb-mode-map (kbd "M-1") 'ecb-goto-window-directories)
 (define-key ecb-mode-map (kbd "M-2") 'ecb-goto-window-sources)
 (define-key ecb-mode-map (kbd "M-3") 'ecb-goto-window-methods)
 (define-key ecb-mode-map (kbd "M-4") 'ecb-goto-window-history)
 (define-key ecb-mode-map (kbd "M-5") 'ecb-goto-window-compilation)
 (define-key ecb-mode-map (kbd "M-0") 'ecb-goto-window-edit1)
+(define-key ecb-mode-map (kbd "C-c w") 'ecb-toggle-ecb-windows)
 
 ;; windows
 (desktop-save-mode 1)
@@ -144,13 +152,17 @@
 (require 'ido)
 (ido-mode t)
 
+
+
 ;; windmove
 (windmove-default-keybindings 'meta)
 
 ;; theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (add-to-list 'load-path "~/.emacs.d/themes")
-(require 'tomorrow-night-theme)
+(require 'tomorrow-night-bright-theme)
+
+
 
 ;; yasnippet
 (add-to-list 'load-path
@@ -158,7 +170,7 @@
 (require 'yasnippet)
 (setq yas/snippet-dirs '("~/.emacs.d/elpa/yasnippet-20140314.255/snippets"
                          "~/.emacs.d/snippets"))
-(add-hook 'html-mode-hook #'(lambda () (set (make-local-variable 'yas-extra-modes) 'web-mode)))
+;; (add-hook 'html-mode-hook #'(lambda () (set (make-local-variable 'yas-extra-modes) 'web-mode)))
 (yas-global-mode 1)
 (yas-reload-all 1)
 (define-key yas-minor-mode-map (kbd "<tab>") nil)
@@ -197,7 +209,7 @@
 (defun create-custom-snippet (snippet-name)
   (interactive "sSnippet name : ")
   (if (not (file-directory-p "~/.emacs.d/snippets"))
-      (make-directory "~/.emacs.d/snippetes"))
+      (make-directory "~/.emacs.d/snippets"))
   (if (not (file-directory-p (format "~/.emacs.d/snippets/%s" major-mode)))
       (make-directory (format "~/.emacs.d/snippets/%s" major-mode)))
   (let ((file-name (format "~/.emacs.d/snippets/%s/%s" major-mode snippet-name)))
@@ -230,10 +242,6 @@
 (require 'slime)
 (setq slime-net-coding-system 'utf-8-unix)
 (slime-setup '(slime-repl))
-
-;; lisp auto indent
-;; (define-key emacs-lisp-mode-map (kbd "RET") 'newline-and-indent) 
-;; (define-key lisp-mode-map (kbd "RET") 'newline-and-indent)
 
 ;; lisp compile key
 ;; http://www.gnu.org/software/emacs/manual/html_node/elisp/Formatting-Strings.html
@@ -309,16 +317,17 @@
 
 ;; js3-mode
 (add-to-list 'ac-modes 'js3-mode)
-(setq js3-lazy-commas t)
-(setq js3-lazy-operators t)
-(setq js3-lazy-dots t)
-(setq js3-expr-indent-offset 4)
-(setq js3-paren-indent-offset 4)
-(setq js3-square-indent-offset 4)
-(setq js3-curly-indent-offset 4)
-(setq js3-auto-indent-p t)
-(setq js3-enter-indents-newline t)
-(setq js3-indent-on-enter-key t)
+(custom-set-variables
+ '(js3-auto-indent-p t)
+ '(js3-curly-indent-offset 2)
+ '(js3-enter-indents-newline t)
+ '(js3-expr-indent-offset 2)
+ '(js3-indent-on-enter-key t)
+ '(js3-lazy-commas t)
+ '(js3-lazy-dots t)
+ '(js3-lazy-operators t)
+ '(js3-paren-indent-offset 2)
+ '(js3-square-indent-offset 2))
 
 ;; web-mode.el
 ;; http://web-mode.org/
@@ -326,23 +335,36 @@
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.jsp\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\html\\'" . web-mode))
+(add-hook 'web-mode-hook (lambda ()
+                           (interactive)
+                           (progn
+                             (setq web-mode-markup-indent-offset 4)
+                             (setq web-mode-css-indent-offset 4)
+                             (setq web-mode-code-indent-offset 4))))
 
 ;; autopair except where you are in interpreter such as slime
 ;; https://github.com/capitaomorte/autopair
-(add-to-list 'load-path "~/.emacs.d/autopair")
-(require 'autopair)
-(autopair-global-mode)
+;; (add-to-list 'load-path "~/.emacs.d/autopair")
+;; (require 'autopair)
+;; (autopair-global-mode)
+;; (add-hook 'slime-repl-mode-hook
+;;           #'(lambda ()
+;;               (setq autopair-dont-activate t)
+;;               (autopair-mode -1)))
+(add-to-list 'load-path "~/.emacs.d/smartparens")
+(require 'smartparens-config)
+(smartparens-global-mode t)
 (add-hook 'slime-repl-mode-hook
           #'(lambda ()
-              (setq autopair-dont-activate t)
-              (autopair-mode -1)))
+              (smartparens-mode -1)))
 
 ;; IRC
 (defun irc-start ()
    "Connect to IRC."
    (interactive)
    (erc :server "irc.freenode.net" :port 6667 :nick "anster" :full-name "razenrote")
-   (setq erc-autojoin-channels-alist '(("freenode.net" "#emacs" "#clnoobs" "#lisp")))
+   (setq erc-autojoin-channels-alist '(("freenode.net" "#emacs" "#lisp")))
    (setq erc-interpret-mirc-color t)
    (setq erc-hide-list '("JOIN" "PART" "QUIT")))
 
@@ -352,20 +374,10 @@
 (require 'emmet-mode)
 (setq emmet-preview-default nil)
 (add-hook 'sgml-mode-hook 'emmet-mode)
+(add-hook 'web-mode-hook 'emmet-mode)
 (add-hook 'css-mode-hook 'emmet-mode)
 
 ;; test area
-(defun my-test-function (&optional file-name)
-  (interactive)
-  (message "%s" file-name))
-  ;; (message "%s" (file-name-nondirectory buffer-file-name)))
-(global-set-key (kbd "C-c p") 'my-test-function)
 
-(defun test-minibuffer-function (text)
-  (interactive "sEnter friend's name :")
-  (message "Name: %s" test))
 
-(defun get-current-major-mode ()
-  (interactive)
-  (message (concat "Hello" (format "%s" major-mode))))
 

@@ -1,0 +1,6 @@
+# name: document ready function
+# key: drf
+# --
+$(document).ready(function() {
+    $1
+});
