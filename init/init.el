@@ -43,6 +43,7 @@
 (set-face-foreground 'highlight "eaeaea")
 (set-face-background 'highlight "424242")
 
+
 ;; custom key setting
 (defun reload-emacs-config ()
   (interactive)

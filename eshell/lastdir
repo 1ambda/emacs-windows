@@ -1,4 +1,3 @@
-c:/github/lisp-restful/view
 c:/github/lisp-restful
 c:/Users/Razenrote/AppData/Roaming/.emacs.d/snippets/emacs-lisp-mode
 c:/Users/Razenrote/AppData/Roaming/.emacs.d/elpa/yasnippet-20140314.255
@@ -11,7 +10,6 @@ c:/github/lisp-restful-example/public/javascripts/backbone
 c:/github/lisp-restful-example/view
 c:/github/lisp-restful-example/public/javascripts/backbone
 c:/github
-c:/github/lisp-restful-example
 c:/github/lisp-restful-example/public
 c:/github/lisp-restful-example/public/bower_components/jquery/dist
 c:/github/lisp-restful-example/public/bower_components/jquery
@@ -20,7 +18,6 @@ c:/github/lisp-restful-example/public/bower_components/semantic-ui
 c:/github/lisp-restful-example/public/bower_components/semantic-ui/build
 c:/github/lisp-restful-example/public/bower_components/semantic-ui/build/packaged
 c:/github/lisp-restful-example/public/bower_components/semantic-ui/build/packaged/css
-c:/github/lisp-restful-example
 c:/Users/Razenrote/AppData/Roaming/.emacs.d/snippets/web-mode
 c:/Users/Razenrote/AppData/Roaming/.emacs.d/snippets/web-mode
 c:/github/lisp-restful-example/views
@@ -31,3 +28,5 @@ c:/Users/Razenrote/AppData/Roaming/.emacs.d/init
 c:/Users/Razenrote/AppData/Roaming/.emacs.d/thumbs
 c:/Users/Razenrote/AppData/Roaming/.emacs.d
 c:/Users/Razenrote/AppData/Roaming/.emacs.d/themes
+c:/github/lisp-restful-example
+c:/Users/Razenrote/AppData/Roaming/.emacs.d
