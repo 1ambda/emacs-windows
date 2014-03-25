@@ -36,12 +36,6 @@
 (defalias 'yes-or-no-p 'y-or-n-p) ;; convert yes-or-no-p into y-or-n-p
 ;; (global-hl-line-mode 1)
 
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)
-
-;; font face
-(set-face-foreground 'highlight "eaeaea")
-(set-face-background 'highlight "424242")
 
 
 ;; custom key setting
@@ -294,9 +288,9 @@
 
 ;; slime custom key binding
 (add-hook 'markdown-mode-hook '(lambda ()
-			     (interactive)
-			     (message "slime")
-			     (define-key markdown-mode-map (kbd "<f8>") 'reload-emacs-config)))
+    (interactive)
+    (message "slime")
+    (define-key markdown-mode-map (kbd "<f8>") 'reload-emacs-config)))
 
 ;; speedbar toggle
 ;; http://seorenn.blogspot.kr/2012/09/emacs-speedbar-sr-speedbarel.html
@@ -317,18 +311,20 @@
 (global-set-key (kbd "C-x p") 'my-speedbar)
 
 ;; js3-mode
+
 (add-to-list 'ac-modes 'js3-mode)
 (custom-set-variables
- '(js3-auto-indent-p t)
- '(js3-curly-indent-offset 2)
- '(js3-enter-indents-newline t)
- '(js3-expr-indent-offset 2)
- '(js3-indent-on-enter-key t)
+ '(js3-lazy-operators t)
  '(js3-lazy-commas t)
  '(js3-lazy-dots t)
- '(js3-lazy-operators t)
+ '(js3-curly-indent-offset 2)
+ '(js3-expr-indent-offset 2)
  '(js3-paren-indent-offset 2)
- '(js3-square-indent-offset 2))
+ '(js3-square-indent-offset 2)
+ '(js3-auto-indent-p t)
+ '(js3-enter-indents-newline t)
+ '(js3-indent-on-enter-key t)
+ '(js3-consistent-level-indent-inner-bracket t))
 
 ;; web-mode.el
 ;; http://web-mode.org/
@@ -344,15 +340,7 @@
                              (setq web-mode-css-indent-offset 4)
                              (setq web-mode-code-indent-offset 4))))
 
-;; autopair except where you are in interpreter such as slime
-;; https://github.com/capitaomorte/autopair
-;; (add-to-list 'load-path "~/.emacs.d/autopair")
-;; (require 'autopair)
-;; (autopair-global-mode)
-;; (add-hook 'slime-repl-mode-hook
-;;           #'(lambda ()
-;;               (setq autopair-dont-activate t)
-;;               (autopair-mode -1)))
+;; smartparens
 (add-to-list 'load-path "~/.emacs.d/smartparens")
 (require 'smartparens-config)
 (smartparens-global-mode t)
@@ -378,7 +366,12 @@
 (add-hook 'web-mode-hook 'emmet-mode)
 (add-hook 'css-mode-hook 'emmet-mode)
 
+;; font face
+(set-face-foreground 'highlight "eaeaea")
+(set-face-background 'highlight "424242")
+
 ;; test area
 
-
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
 
