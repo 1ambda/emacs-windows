@@ -27,7 +27,7 @@ git submodule update
 - yasnippet
 - markdown-mode
 - js3-mode
-- auto-pair
+- smartparens
 
 
 
