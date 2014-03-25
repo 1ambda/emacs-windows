@@ -326,6 +326,12 @@
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.jsp\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+(setq web-mode-markup-indent-offset 4)
+(setq web-mode-code-indent-offset 4)
+(setq web-mode-css-indent-offset 4)
+(setq web-mode-indent-style 4)
+   
 
 ;; autopair except where you are in interpreter such as slime
 ;; https://github.com/capitaomorte/autopair
@@ -352,6 +358,7 @@
 (require 'emmet-mode)
 (setq emmet-preview-default nil)
 (add-hook 'sgml-mode-hook 'emmet-mode)
+(add-hook 'web-mode-hook 'emmet-mode)
 (add-hook 'css-mode-hook 'emmet-mode)
 
 ;; test area
