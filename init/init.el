@@ -77,7 +77,7 @@
 ;; custom key setting using "C-c"
 (global-set-key (kbd "C-c S") 'create-custom-snippet)        ;; create snippet of current mode
 (global-set-key (kbd "C-c s") 'reload-current-mode-snippets) ;; loading all snippets
-(global-set-key (kbd "C-c E")
+(global-set-key (kbd "C-c e")
                 (lambda ()
                   (interactive)
                   (find-file "~/.emacs.d/init/init.el")))
