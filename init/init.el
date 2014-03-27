@@ -43,8 +43,7 @@
 ;; (global-hl-line-mode 1)
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-
-
+(setq inhibit-startup-message t)
 
 ;; custom key setting
 (defun reload-emacs-config ()
@@ -143,18 +142,6 @@
 (define-key ecb-mode-map (kbd "C-c w") 'ecb-toggle-ecb-windows)
 
 
-(require 'cc-mode)
-(define-key c++-mode-map (kbd "C-c C-c") 'execute-extended-command)
-(define-key c-mode-map (kbd "C-c C-c") 'execute-extended-command)
-(define-key c++-mode-map (kbd "C-c c") 'compile)
-(define-key c-mode-map (kbd "C-c c") 'compile)
-(setq-default c-basic-offset 4)
-(setq c-default-style 
-      '((java-mode . "java") (c++-mode . "stroustrup") (other . "k&r")))
-(require 'xcscope)
-(cscope-setup)
-(add-to-list 'auto-mode-alist '("\\.h$" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.cpp$" . c++-mode))
 
 
 ;; evil
@@ -365,7 +352,7 @@
 (require 'smartparens-config)
 (smartparens-global-mode t)
 (add-hook 'slime-repl-mode-hook
-          #'(lambda ()
+          (lambda ()
               (smartparens-mode -1)))
 
 ;; IRC
@@ -422,40 +409,54 @@
       (setq shell-file-name explicit-shell-file-name)
       (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
       (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)))
-  
-;; C, C++ Development Env 
+
+;; M-x == C-c C-c
 ;; in case of C, C++ mode We have to override the key binding
 (add-hook 'eshell-mode-hook 
           (lambda ()
             (define-key eshell-mode-map (kbd "C-c C-c") 'execute-extended-command)))
 (define-key compilation-mode-map (kbd "C-c C-c") 'execute-extended-command)
 
-
+;; C, C++ Development Env
+(require 'cc-mode)
+(define-key c++-mode-map (kbd "C-c C-c") 'execute-extended-command)
+(define-key c-mode-map (kbd "C-c C-c") 'execute-extended-command)
+(define-key c++-mode-map (kbd "C-c c") 'compile)
+(define-key c-mode-map (kbd "C-c c") 'compile)
+(setq-default c-basic-offset 4)
+(setq c-default-style 
+      '((java-mode . "java") (c++-mode . "stroustrup") (other . "k&r")))
 
 ;; xcscope
 ;; https://github.com/dkogan/xcscope.el
 ;; TODO : http://www.emacswiki.org/emacs/CScopeAndEmacs
-;; (add-to-list 'load-path "~/.emacs.d/xcscope.el")
-;; (add-hook 'c-mode-hook 'cscope-minor-mode)
-;; (add-hook 'c++-mode-hook 'cscope-minor-mode)
+(require 'xcscope)
+(cscope-setup)
 
 ;; helm
 ;; TODO : https://github.com/jixiuf/helm-etags-plus
-;; (add-to-list 'load-path "~/.emacs.d/helm")
-;; (require 'helm-config)
+(add-to-list 'load-path "~/.emacs.d/helm")
+(require 'helm-config)
 
 ;; ctags config
 ;; TODO : http://www.emacswiki.org/emacs/BuildTags
 ;; TODO : [etags shortcut]
 ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Find-Tag.html#Find-Tag
 
-;; test area
-
-
-;; windows
-(desktop-save-mode 1)
-(setq history-length 250)
-(add-to-list 'desktop-globals-to-save 'file-name-history)
+;; revive.el
 (add-to-list 'load-path "~/.emacs.d/windows")
+(autoload 'save-current-configuration "revive" "Save status" t)
+(autoload 'resume "revive" "Resume Emacs" t)
+(autoload 'wipe "revive" "Wipe Emacs" t)
+(define-key ctl-x-map "S" 'save-current-configuration)
+(define-key ctl-x-map "R" 'resume)
+(define-key ctl-x-map "W" 'wipe)
+(add-hook 'kill-emacs-hook 'save-current-configuration)
+(add-hook 'after-init-hook 'resume)
+
+;; windows.el
 (require 'windows)
 (win:startup-with-window)
+(define-key ctl-x-map "C" 'see-you-again)
+
+;; test area
