@@ -19,4 +19,9 @@
 [submodule "smartparens"]
     path = smartparens
     url = git://github.com/Fuco1/smartparens
- 
+[submodule "helm"]
+    path = helm
+    url = git://github.com/emacs-helm/helm
+[submodule "xcscope.el"]
+    path = xcscope.el
+    url = https://github.com/dkogan/xcscope.el

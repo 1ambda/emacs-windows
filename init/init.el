@@ -1,4 +1,3 @@
-
 ;; location variable
 (cond
  ((setq os-windows-p (eq system-type 'windows-nt)))
@@ -7,7 +6,6 @@
 
 ;; language
 ;; http://terzeron.net/wiki/doku.php?id=emacs_%EC%84%A4%EC%A0%95
-
 (when enable-multibyte-characters
   (set-language-environment "Korean")
   (setq locale-value 
@@ -89,7 +87,7 @@
 ;; use C-c C-c instead of M-x. It would be easier.
 (global-set-key (kbd "C-c C-c") 'execute-extended-command)
 (global-set-key (kbd "C-c S") 'create-custom-snippet)        ;; create snippet of current mode
-(global-set-key (kbd "C-c s") 'reload-current-mode-snippets) ;; loading all snippets
+(global-set-key (kbd "C-c R") 'reload-current-mode-snippets) ;; loading all snippets
 (global-set-key (kbd "C-c e")
                 (lambda ()
                   (interactive)
@@ -399,23 +397,67 @@
             (if google-drive-installed-p
                 (switch-to-buffer (find-file "~/Google/TODO")))))
 
+
+
+;; use cygwin bash instead os MS-DOS on windows
+(if os-windows-p
+    (progn
+      (add-to-list 'load-path "~/.emacs.d/cygwin-mount")
+      (setenv "PATH" (concat "c:/cygwin/bin;" (getenv "PATH")))
+      (setq exec-path (cons "c:/cygwin/bin/" exec-path))
+      (require 'cygwin-mount)
+      (cygwin-mount-activate)
+      
+      (add-hook 'comint-output-filter-functions 'shell-strip-ctrl-m nil t)
+      (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt nil t)
+      (setq explicit-shell-file-name "bash.exe")
+      (setq shell-file-name explicit-shell-file-name)
+      (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
+      (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)))
+  
 ;; C, C++ Development Env 
 ;; in case of C, C++ mode We have to override the key binding
-(define-key c-mode-map (kbd "C-c C-c") 'execute-extended-command)
-(define-key compilation-mode-map (kbd "C-c C-c") 'execute-extended-command)
 (add-hook 'eshell-mode-hook 
           (lambda ()
             (define-key eshell-mode-map (kbd "C-c C-c") 'execute-extended-command)))
 
-(setq-default c-basic-offset 4)
-(setq c-default-style 
-      '((java-mode . "java") (c++-mode . "stroustrup") (other . "k&r")))
-(add-to-list 'auto-mode-alist '("\\.h$" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.cpp$" . c++-mode))
+(add-hook 'c++-mode-hook
+          (lambda ()
+            (interactive)
+            (define-key c++-mode-map (kbd "C-c C-c") 'execute-extended-command)
+            (define-key c++-mode-map (kbd "C-c c") 'compile)
+            (add-to-list 'auto-mode-alist '("\\.h$" . c++-mode))
+            (add-to-list 'auto-mode-alist '("\\.cpp$" . c++-mode))
+            (setq-default c-basic-offset 4)
+            (setq c-default-style 
+                  '((java-mode . "java") (c++-mode . "stroustrup") (other . "k&r")))))
 
-          
-(define-key c-mode-map (kbd "C-c c") 'compile)
+(define-key compilation-mode-map (kbd "C-c C-c") 'execute-extended-command)
 
-;; define compilation mode key map
+(add-hook 'c-mode-hook 
+          (lambda ()
+            (interactive)
+            (define-key c-mode-map (kbd "C-c C-c") 'execute-extended-command)
+            (define-key c-mode-map (kbd "C-c c") 'compile)
+            (setq-default c-basic-offset 4)
+            (setq c-default-style 
+                  '((java-mode . "java") (c++-mode . "stroustrup") (other . "k&r")))))
+
+;; xcscope
+;; https://github.com/dkogan/xcscope.el
+;; TODO : http://www.emacswiki.org/emacs/CScopeAndEmacs
+(add-to-list 'load-path "~/.emacs.d/xcscope.el")
+(require 'xcscope)
+(cscope-setup)
+
+;; helm
+;; TODO : https://github.com/jixiuf/helm-etags-plus
+(add-to-list 'load-path "~/.emacs.d/helm")
+(require 'helm-config)
+
+;; ctags config
+;; TODO : http://www.emacswiki.org/emacs/BuildTags
+;; TODO : [etags shortcut]
+;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Find-Tag.html#Find-Tag
 
 ;; test area
