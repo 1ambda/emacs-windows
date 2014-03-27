@@ -347,13 +347,6 @@
                              (setq web-mode-css-indent-offset 4)
                              (setq web-mode-code-indent-offset 4))))
 
-;; smartparens
-(add-to-list 'load-path "~/.emacs.d/smartparens")
-(require 'smartparens-config)
-(smartparens-global-mode t)
-(add-hook 'slime-repl-mode-hook
-          (lambda ()
-              (smartparens-mode -1)))
 
 ;; IRC
 (defun irc-start ()
@@ -427,21 +420,12 @@
 (setq c-default-style 
       '((java-mode . "java") (c++-mode . "stroustrup") (other . "k&r")))
 
-;; xcscope
-;; https://github.com/dkogan/xcscope.el
-;; TODO : http://www.emacswiki.org/emacs/CScopeAndEmacs
-(require 'xcscope)
-(cscope-setup)
 
 ;; helm
 ;; TODO : https://github.com/jixiuf/helm-etags-plus
 (add-to-list 'load-path "~/.emacs.d/helm")
 (require 'helm-config)
 
-;; ctags config
-;; TODO : http://www.emacswiki.org/emacs/BuildTags
-;; TODO : [etags shortcut]
-;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Find-Tag.html#Find-Tag
 
 ;; revive.el
 (add-to-list 'load-path "~/.emacs.d/windows")
@@ -459,4 +443,28 @@
 (win:startup-with-window)
 (define-key ctl-x-map "C" 'see-you-again)
 
+;; smartparens
+(add-to-list 'load-path "~/.emacs.d/smartparens")
+(require 'smartparens-config)
+(smartparens-global-mode t)
+(add-hook 'slime-repl-mode-hook
+          (lambda ()
+              (smartparens-mode -1)))
+
+;; xcscope
+;; https://github.com/dkogan/xcscope.el
+;; TODO : http://www.emacswiki.org/emacs/CScopeAndEmacs
+(require 'xcscope)
+(cscope-setup)
+
+;; ctags config
+;; TODO : http://www.emacswiki.org/emacs/BuildTags
+;; TODO : [etags shortcut]
+;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Find-Tag.html#Find-Tag
+
 ;; test area
+
+;; google c, c++ style guide
+(add-to-list 'load-path "~/.emacs.d/google-c-style-guide")
+(require 'google-c-style)
+(add-hook 'c-mode-common-hook 'google-make-newline-indent)
