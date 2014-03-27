@@ -6,16 +6,25 @@
  ((setq os-mac-p (eq-system-type 'darwin))))
 
 ;; language
-(set-language-environment "utf-8")
-(setq-default coding-system 'utf-8)
-(setq-default buffer-file-coding-system 'utf-8)
-(setq-default buffer-coding-system 'utf-8)
-(setq-default file-name-coding-system 'utf-8)
-(setq-default senmail-coding-system 'utf-8)
-(setq file-coding-system 'utf-8)
-(setq sendmail-coding-system 'utf-8)
-(setq terminal-coding-system 'utf-8)
-(setq shell-coding-system 'utf-8)
+;; http://terzeron.net/wiki/doku.php?id=emacs_%EC%84%A4%EC%A0%95
+
+(when enable-multibyte-characters
+  (set-language-environment "Korean")
+  (setq locale-value 
+        (if (string= (getenv "LANG") "ko_KR.utf8") 'utf-8 'euc-kr))
+  (prefer-coding-system locale-value)
+  (set-default-coding-systems locale-value)
+  (setq-default file-name-coding-system locale-value)
+  (setq-default locale-coding-system locale-value)
+  (set-terminal-coding-system locale-value)
+  (set-keyboard-coding-system locale-value)
+  (set-selection-coding-system locale-value)
+  (setq-default buffer-file-coding-system locale-value)
+  (setq-default buffer-coding-system locale-value)
+  (setq file-coding-system locale-value)
+  (setq terminal-coding-system locale-value)
+  (setq shell-coding-system locale-value)
+)
 
 ;; package
 (require 'package)
@@ -35,6 +44,8 @@
 (electric-indent-mode 1) ;; auto indent
 (defalias 'yes-or-no-p 'y-or-n-p) ;; convert yes-or-no-p into y-or-n-p
 ;; (global-hl-line-mode 1)
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 
 
 
@@ -75,6 +86,8 @@
 (global-set-key (kbd "C-/") 'comment-eclipse)
 
 ;; custom key setting using "C-c"
+;; use C-c C-c instead of M-x. It would be easier.
+(global-set-key (kbd "C-c C-c") 'execute-extended-command)
 (global-set-key (kbd "C-c S") 'create-custom-snippet)        ;; create snippet of current mode
 (global-set-key (kbd "C-c s") 'reload-current-mode-snippets) ;; loading all snippets
 (global-set-key (kbd "C-c e")
@@ -209,7 +222,8 @@
       (make-directory (format "~/.emacs.d/snippets/%s" major-mode)))
   (let ((file-name (format "~/.emacs.d/snippets/%s/%s" major-mode snippet-name)))
     (if (file-exists-p file-name)
-        (message "The snippet already exists")
+        (progn (message "The snippet already exists")
+               (switch-to-buffer (find-file-noselect file-name)))
       (progn (write-region *new-snippet-content* nil file-name)
              (switch-to-buffer (find-file-noselect file-name))))))
 
@@ -370,8 +384,38 @@
 (set-face-foreground 'highlight "eaeaea")
 (set-face-background 'highlight "424242")
 
-;; test area
-
+;; tab
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 
+;; google drive sync
+(defvar google-drive-installed-p nil)
+(if (file-directory-p "~/Google")
+    (setq google-drive-installed-p t))
+
+;; load TODO in google drive after initializing Emacs
+(add-hook 'after-init-hook
+          (lambda ()
+            (if google-drive-installed-p
+                (switch-to-buffer (find-file "~/Google/TODO")))))
+
+;; C, C++ Development Env 
+;; in case of C, C++ mode We have to override the key binding
+(define-key c-mode-map (kbd "C-c C-c") 'execute-extended-command)
+(define-key compilation-mode-map (kbd "C-c C-c") 'execute-extended-command)
+(add-hook 'eshell-mode-hook 
+          (lambda ()
+            (define-key eshell-mode-map (kbd "C-c C-c") 'execute-extended-command)))
+
+(setq-default c-basic-offset 4)
+(setq c-default-style 
+      '((java-mode . "java") (c++-mode . "stroustrup") (other . "k&r")))
+(add-to-list 'auto-mode-alist '("\\.h$" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.cpp$" . c++-mode))
+
+          
+(define-key c-mode-map (kbd "C-c c") 'compile)
+
+;; define compilation mode key map
+
+;; test area
