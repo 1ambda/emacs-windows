@@ -23,7 +23,6 @@
   (setq terminal-coding-system locale-value)
   (setq shell-coding-system locale-value)
 )
-
 ;; package
 (require 'package)
 (add-to-list 'package-archives
@@ -117,6 +116,7 @@
 (add-to-list 'semantic-default-submodes 'global-semantic-decoration-mode)
 
 
+
 ;; cedet semantic
 (semantic-mode 1)
 (require 'semantic/ia)
@@ -142,12 +142,20 @@
 (define-key ecb-mode-map (kbd "M-0") 'ecb-goto-window-edit1)
 (define-key ecb-mode-map (kbd "C-c w") 'ecb-toggle-ecb-windows)
 
-;; windows
-(desktop-save-mode 1)
-(desktop-read)
-(add-to-list 'load-path "~/.emacs.d/windows")
-(require 'windows)
-(win:startup-with-window)
+
+(require 'cc-mode)
+(define-key c++-mode-map (kbd "C-c C-c") 'execute-extended-command)
+(define-key c-mode-map (kbd "C-c C-c") 'execute-extended-command)
+(define-key c++-mode-map (kbd "C-c c") 'compile)
+(define-key c-mode-map (kbd "C-c c") 'compile)
+(setq-default c-basic-offset 4)
+(setq c-default-style 
+      '((java-mode . "java") (c++-mode . "stroustrup") (other . "k&r")))
+(require 'xcscope)
+(cscope-setup)
+(add-to-list 'auto-mode-alist '("\\.h$" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.cpp$" . c++-mode))
+
 
 ;; evil
 (add-to-list 'load-path "~/.emacs.d/evil") ;;no need with 24
@@ -420,40 +428,21 @@
 (add-hook 'eshell-mode-hook 
           (lambda ()
             (define-key eshell-mode-map (kbd "C-c C-c") 'execute-extended-command)))
-
-(add-hook 'c++-mode-hook
-          (lambda ()
-            (interactive)
-            (define-key c++-mode-map (kbd "C-c C-c") 'execute-extended-command)
-            (define-key c++-mode-map (kbd "C-c c") 'compile)
-            (add-to-list 'auto-mode-alist '("\\.h$" . c++-mode))
-            (add-to-list 'auto-mode-alist '("\\.cpp$" . c++-mode))
-            (setq-default c-basic-offset 4)
-            (setq c-default-style 
-                  '((java-mode . "java") (c++-mode . "stroustrup") (other . "k&r")))))
-
 (define-key compilation-mode-map (kbd "C-c C-c") 'execute-extended-command)
 
-(add-hook 'c-mode-hook 
-          (lambda ()
-            (interactive)
-            (define-key c-mode-map (kbd "C-c C-c") 'execute-extended-command)
-            (define-key c-mode-map (kbd "C-c c") 'compile)
-            (setq-default c-basic-offset 4)
-            (setq c-default-style 
-                  '((java-mode . "java") (c++-mode . "stroustrup") (other . "k&r")))))
+
 
 ;; xcscope
 ;; https://github.com/dkogan/xcscope.el
 ;; TODO : http://www.emacswiki.org/emacs/CScopeAndEmacs
-(add-to-list 'load-path "~/.emacs.d/xcscope.el")
-(require 'xcscope)
-(cscope-setup)
+;; (add-to-list 'load-path "~/.emacs.d/xcscope.el")
+;; (add-hook 'c-mode-hook 'cscope-minor-mode)
+;; (add-hook 'c++-mode-hook 'cscope-minor-mode)
 
 ;; helm
 ;; TODO : https://github.com/jixiuf/helm-etags-plus
-(add-to-list 'load-path "~/.emacs.d/helm")
-(require 'helm-config)
+;; (add-to-list 'load-path "~/.emacs.d/helm")
+;; (require 'helm-config)
 
 ;; ctags config
 ;; TODO : http://www.emacswiki.org/emacs/BuildTags
@@ -461,3 +450,12 @@
 ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Find-Tag.html#Find-Tag
 
 ;; test area
+
+
+;; windows
+(desktop-save-mode 1)
+(setq history-length 250)
+(add-to-list 'desktop-globals-to-save 'file-name-history)
+(add-to-list 'load-path "~/.emacs.d/windows")
+(require 'windows)
+(win:startup-with-window)

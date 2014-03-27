@@ -22,6 +22,3 @@
 [submodule "helm"]
     path = helm
     url = git://github.com/emacs-helm/helm
-[submodule "xcscope.el"]
-    path = xcscope.el
-    url = https://github.com/dkogan/xcscope.el
