@@ -14,6 +14,10 @@ git submodule update
 
 ### 2. Contents
 
+Support C/C++, Lisp, Javascript/Node.js, HTML/CSS
+
+TODO : Java, Python
+
 - cedet 1.1
 - ecb 2.40
 - evil
@@ -24,10 +28,15 @@ git submodule update
 - web-mode
 - ido
 - windmove
+- windows
+- revive
 - yasnippet
 - markdown-mode
 - js3-mode
 - smartparens
+- helm (previously known for anything.el)
+- xcscope
+
 
 
 
