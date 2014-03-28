@@ -512,6 +512,7 @@
   (add-hook 'semantic-init-hooks 'my-semantic-hook))
 
 ;; auto-complete-clang
+;; we need cygwin-clang
 (add-to-list 'load-path "~/.emacs.d/auto-complete-clang")
 (require 'auto-complete-clang)
 (defun my-ac-config ()
@@ -579,7 +580,6 @@
 ;; (add-hook 'write-file-hooks 'auto-update-file-header)
 ;; (autoload 'auto-make-header "header2")
 ;; (add-hook 'c-mode-common-hook   'auto-make-header)
-
 
 
 ;; disable stickyfunc mode

@@ -39,8 +39,13 @@ TODO : Java, Python
 - smartparens
 - helm (previously known for anything.el)
 - xcscope
-
-
+- auto-complete-c-headers
+- auto-complete-clang
+- iedit
+- flymake
+- powerline
+- header2
+- member-functions
 
 
 ### 3. OS dependent config
