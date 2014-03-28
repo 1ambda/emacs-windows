@@ -22,3 +22,15 @@
 [submodule "helm"]
     path = helm
     url = git://github.com/emacs-helm/helm
+[submodule "auto-complete-c-headers"]
+    path = auto-complete-c-headers
+    url = git://github.com/mooz/auto-complete-c-headers
+[submodule "auto-complete-clang"]
+    path = auto-complete-clang
+    url = git://github.com/brianjcj/auto-complete-clang
+[submodule "powerline"]
+    path = powerline
+    url = git://github.com/milkypostman/powerline
+[submodule "iedit"]
+    path = iedit
+    url = git://github.com/victorhge/iedit

@@ -4,6 +4,11 @@
  ((setq os-linux-p (eq system-type 'gnu/linux)))
  ((setq os-mac-p (eq-system-type 'darwin))))
 
+(when (and os-windows-p
+           (file-directory-p "C:/cygwin"))
+  (setq cygwin-installed-p t))
+
+
 ;; language
 ;; http://terzeron.net/wiki/doku.php?id=emacs_%EC%84%A4%EC%A0%95
 (when enable-multibyte-characters
@@ -37,7 +42,7 @@
 (global-linum-mode t) ;; line-number
 (setq make-backup-files nil) ;; no backup file
 (setq auto-save-default nil) ;; no auto save
-(global-auto-revert-mode 1) ;; auto load
+;; (global-auto-revert-mode 1) ;; auto load
 (electric-indent-mode 1) ;; auto indent
 (defalias 'yes-or-no-p 'y-or-n-p) ;; convert yes-or-no-p into y-or-n-p
 ;; (global-hl-line-mode 1)
@@ -142,8 +147,6 @@
 (define-key ecb-mode-map (kbd "C-c w") 'ecb-toggle-ecb-windows)
 
 
-
-
 ;; evil
 (add-to-list 'load-path "~/.emacs.d/evil") ;;no need with 24
 (require 'evil)
@@ -153,16 +156,8 @@
 (require 'ido)
 (ido-mode t)
 
-
-
 ;; windmove
 (windmove-default-keybindings 'meta)
-
-;; theme
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(add-to-list 'load-path "~/.emacs.d/themes")
-(require 'tomorrow-night-bright-theme)
-
 
 
 ;; yasnippet
@@ -233,6 +228,7 @@
 (require 'auto-complete-config)
 (ac-config-default)  
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/auto-complete/ac-dict")
+
 
 ;; sbcl, slime
 (cond (os-windows-p (progn (setq inferior-lisp-program "C:/lisp/sbcl/sbcl.exe")
@@ -369,9 +365,6 @@
 (add-hook 'web-mode-hook 'emmet-mode)
 (add-hook 'css-mode-hook 'emmet-mode)
 
-;; font face
-(set-face-foreground 'highlight "eaeaea")
-(set-face-background 'highlight "424242")
 
 ;; tab
 (setq-default indent-tabs-mode nil)
@@ -391,7 +384,7 @@
 
 
 ;; use cygwin bash instead os MS-DOS on windows
-(if os-windows-p
+(if cygwin-installed-p
     (progn
       (add-to-list 'load-path "~/.emacs.d/cygwin-mount")
       (setenv "PATH" (concat "c:/cygwin/bin;" (getenv "PATH")))
@@ -413,31 +406,24 @@
             (define-key eshell-mode-map (kbd "C-c C-c") 'execute-extended-command)))
 (define-key compilation-mode-map (kbd "C-c C-c") 'execute-extended-command)
 
+
+
 ;; C, C++ Development Env
 (require 'cc-mode)
-(setq-default c-basic-offset 4)
 (setq c-default-style 
       '((java-mode . "java") (c++-mode . "stroustrup") (other . "k&r")))
+
+;; google c, c++ style guide
+(add-to-list 'load-path "~/.emacs.d/google-c-style-guide")
+;; (require 'google-c-style)
+;; (add-hook 'c-mode-common-hook 'google-set-c-style)
+;; (add-hook 'c-mode-common-hook 'google-make-newline-indent)
+(setq-default c-basic-offset 4)
 
 ;; C
 (define-key c-mode-map (kbd "C-c C-c") 'execute-extended-command)
 (define-key c-mode-map (kbd "C-c c") 'compile)
 
-;; revive.el
-(add-to-list 'load-path "~/.emacs.d/windows")
-(autoload 'save-current-configuration "revive" "Save status" t)
-(autoload 'resume "revive" "Resume Emacs" t)
-(autoload 'wipe "revive" "Wipe Emacs" t)
-(define-key ctl-x-map "S" 'save-current-configuration)
-(define-key ctl-x-map "R" 'resume)
-(define-key ctl-x-map "W" 'wipe)
-(add-hook 'kill-emacs-hook 'save-current-configuration)
-(add-hook 'after-init-hook 'resume)
-
-;; windows.el
-(require 'windows)
-(win:startup-with-window)
-(define-key ctl-x-map "C" 'see-you-again)
 
 ;; smartparens
 (add-to-list 'load-path "~/.emacs.d/smartparens")
@@ -445,32 +431,29 @@
 (smartparens-global-mode t)
 (add-hook 'slime-repl-mode-hook
           (lambda ()
-              (smartparens-mode -1)))
+            (smartparens-mode -1)))
 
-;; xcscope
-;; https://github.com/dkogan/xcscope.el
-;; TODO : http://www.emacswiki.org/emacs/CScopeAndEmacs
-(require 'xcscope)
-;; close *cscope* buffer automatically
-(setq cscope-close-window-after-select t)
-(cscope-setup)
+(sp-local-pair 'c++-mode
+               "{" nil :post-handlers
+               '((my-create-newline-and-enter-sexp "RET")))
+
+(defun my-create-newline-and-enter-sexp (&rest _ignored)
+  (newline)
+  (indent-according-to-mode)
+  (forward-line -1)
+  (indent-according-to-mode))
+
 
 ;; ctags config
 ;; TODO : http://www.emacswiki.org/emacs/BuildTags
 ;; TODO : [etags shortcut]
 ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Find-Tag.html#Find-Tag
 
-;; google c, c++ style guide
-(add-to-list 'load-path "~/.emacs.d/google-c-style-guide")
-(require 'google-c-style)
-(add-hook 'c-mode-common-hook 'google-make-newline-indent)
-(define-key c-mode-map (kbd "C-c s o") 'ff-find-other-file)
 
 ;; helm
 ;; TODO : https://github.com/jixiuf/helm-etags-plus
 (add-to-list 'load-path "~/.emacs.d/helm")
 (require 'helm-config)
-
 
 ;; C++
 (defun compile-current-file ()
@@ -492,4 +475,142 @@
 
 ;; (define-key c++-mode-map (kbd "C-c r") 'compile-and-execute)
 
-;; test area
+
+;; auto-complete-c-headers
+;; https://github.com/mooz/auto-complete-c-headers
+;; gcc -xc++ -E -v - tell you where stdlib are.
+(add-to-list 'load-path "~/.emacs.d/auto-complete-c-headers")
+(defun my:ac-c-headers-init ()
+  (require 'auto-complete-c-headers)
+  (add-to-list 'ac-sources 'ac-source-c-headers)
+  (when cygwin-installed-p
+    (add-to-list 'achead:include-directories
+                 '"C:/cygwin/lib/gcc/i686-pc-cygwin/4.8.2/include")
+    (add-to-list 'achead:include-directories
+                 '"C:/cygwin/lib/gcc/i686-pc-cygwin/4.8.2/include/c++")
+    (add-to-list 'achead:include-directories
+                 '"C:/cygwin/usr/include")))
+
+(add-hook 'c++-mode-hook 'my:ac-c-headers-init)
+(add-hook 'c-mode-hook 'my:ac-c-headers-init)
+
+;; add C, C++ include paths
+
+(when cygwin-installed-p
+  (setf c-default-path 
+        "C:/cygwin/lib/gcc/i686-pc-cygwin/4.8.2/include")
+  (setf c-extend-path
+        "C:/cygwin/usr/include")
+  (setf c++-default-path
+        "C:/cygwin/lib/gcc/i686-pc-cygwin/4.8.2/include/c++")
+  (defun my-semantic-hook ()
+    (semantic-add-system-include c-default-path 'c-mode)
+    (semantic-add-system-include c-extend-path 'c-mode)
+    (semantic-add-system-include c-default-path 'c++-mode)
+    (semantic-add-system-include c-extend-path 'c++-mode)
+    (semantic-add-system-include c++-default-path 'c++-mode))
+  (add-hook 'semantic-init-hooks 'my-semantic-hook))
+
+;; auto-complete-clang
+(add-to-list 'load-path "~/.emacs.d/auto-complete-clang")
+(require 'auto-complete-clang)
+(defun my-ac-config ()
+  (add-hook 'c-mode-common-hook 'ac-cc-mode-setup))
+(defun my-ac-cc-mode-setup ()
+  (setq ac-sources (append '(ac-source-clang) ac-sources))
+  (add-hook 'c-mode-common-hook 'ac-cc-mode-setup))
+(add-hook 'c-mode-common-hook 'my-ac-cc-mode-setup)
+(my-ac-config)
+
+(when cygwin-installed-p
+  (setq ac-clang-flags
+        (mapcar (lambda (item)(concat "-I" item))
+                (split-string
+                 "
+/usr/lib/gcc/i686-pc-cygwin/4.8.2/include/c++
+/usr/lib/gcc/i686-pc-cygwin/4.8.2/include/c++/i686-pc-cygwin
+/usr/lib/gcc/i686-pc-cygwin/4.8.2/include/c++/backward
+/usr/lib/gcc/i686-pc-cygwin/4.8.2/include
+/usr/lib/gcc/i686-pc-cygwin/4.8.2/include-fixed
+/usr/include
+"))))
+
+;; xcscope
+;; https://github.com/dkogan/xcscope.el
+;; TODO : http://www.emacswiki.org/emacs/CScopeAndEmacs
+(require 'xcscope)
+;; close *cscope* buffer automatically
+(setq cscope-close-window-after-select t)
+(cscope-setup)
+(define-key c-mode-map (kbd "C-c s o") 'ff-find-other-file)
+
+
+;; revive.el
+(add-to-list 'load-path "~/.emacs.d/windows")
+(autoload 'save-current-configuration "revive" "Save status" t)
+(autoload 'resume "revive" "Resume Emacs" t)
+(autoload 'wipe "revive" "Wipe Emacs" t)
+(define-key ctl-x-map "S" 'save-current-configuration)
+(define-key ctl-x-map "R" 'resume)
+(define-key ctl-x-map "W" 'wipe)
+(add-hook 'kill-emacs-hook 'save-current-configuration)
+(add-hook 'after-init-hook 'resume)
+
+;; windows.el
+(require 'windows)
+(win:startup-with-window)
+(define-key ctl-x-map "C" 'see-you-again)
+
+
+;; iedit
+;; (add-to-list 'load-path "~/.emacs.d/iedit")
+;; (require 'iedit)
+;; (global-set-key (kbd "C-c ;") 'iedit-mode)
+
+;; member-function
+(add-to-list 'load-path "~/.emacs.d/member-function")
+(require 'member-functions)
+(setq mf--source-file-extension "cpp")
+
+;; header2 -> automaticall insert comment
+;; (add-to-list 'load-path "~/.emacs.d/header2")
+;; (require 'header2)
+;; (autoload 'auto-update-file-header "header2")
+;; (add-hook 'write-file-hooks 'auto-update-file-header)
+;; (autoload 'auto-make-header "header2")
+;; (add-hook 'c-mode-common-hook   'auto-make-header)
+
+
+
+;; disable stickyfunc mode
+(global-semantic-stickyfunc-mode -1)
+
+;; theme
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(add-to-list 'load-path "~/.emacs.d/themes")
+(require 'tomorrow-night-bright-theme)
+
+;; power line
+(add-to-list 'load-path "~/.emacs.d/powerline")
+(require 'powerline)
+(powerline-default-theme)
+
+;; (set-face-attribute 'mode-line nil
+;;                     :foreground "white"
+;;                     :background "steelblue"
+;;                     :box nil)
+;; (set-face-attribute 'mode-line-inactive nil
+;;                     :box nil)
+
+(set-face-attribute 'highlight nil
+                    :foreground "eaeaea"
+                    :background "424242")
+
+;; rfringe
+(add-to-list 'load-path "~/.emacs.d/rfringe")
+(require 'rfringe)
+
+;; flycheck
+;; https://github.com/jedrz/.emacs.d
+;; (add-to-list 'load-path "~/.emacs.d/init")
+;; (require 'setup-flycheck)
