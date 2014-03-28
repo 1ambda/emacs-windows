@@ -204,8 +204,7 @@
 (setq *new-snippet-content*
 "# name: 
 # key: 
-# --
-")
+# --")
 
 (defun create-custom-snippet (snippet-name)
   (interactive "sSnippet name : ")
@@ -277,9 +276,10 @@
 (add-to-list 'load-path "~/.emacs.d/markdown-mode")
 (autoload 'markdown-mode "markdown-mode"
    "Major mode for editing Markdown files" t)
-(setq markdown-command "perl ~/.emacs.d/markdown/Markdown.pl"
-      markdown-content-type "text/html"
-      markdown-css-path "style.css"
+(setq markdown-command
+      "~/.emacs.d/markdown/Markdown.pl"
+      ;; markdown-content-type "text/html"
+      ;; markdown-css-path "style.css"
       markdown-coding-system 'utf-8)
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 (add-hook 'markdown-mode-hook
@@ -289,6 +289,8 @@
             (define-key markdown-mode-map (kbd "M-<left>") nil)
             (define-key markdown-mode-map (kbd "M-<right>") nil)))
 ;; save exported HTML into temp directory
+(if (not (file-directory-p "~/.emacs.d/temp-dir"))
+    (make-directory "~/.emacs.d/temp-dir"))
 (defadvice markdown-export (around set-temp-path-for-exported-file activate)
   (ad-set-arg 0 (format "%s/%s" "~/.emacs.d/temp-dir" (file-name-nondirectory buffer-file-name)))
   ad-do-it)
@@ -305,6 +307,7 @@
 (require 'sr-speedbar)
 (setq sr-speedbar-right-side nil)
 (setq sr-speedbar-auto-refresh t)
+(setq sr-speedbar-delete-windows t)
 (defun my-speedbar ()
   "Toggle sr-speedbar and select"
   (interactive)
@@ -412,20 +415,13 @@
 
 ;; C, C++ Development Env
 (require 'cc-mode)
-(define-key c++-mode-map (kbd "C-c C-c") 'execute-extended-command)
-(define-key c-mode-map (kbd "C-c C-c") 'execute-extended-command)
-(define-key c++-mode-map (kbd "C-c c") 'compile)
-(define-key c-mode-map (kbd "C-c c") 'compile)
 (setq-default c-basic-offset 4)
 (setq c-default-style 
       '((java-mode . "java") (c++-mode . "stroustrup") (other . "k&r")))
 
-
-;; helm
-;; TODO : https://github.com/jixiuf/helm-etags-plus
-(add-to-list 'load-path "~/.emacs.d/helm")
-(require 'helm-config)
-
+;; C
+(define-key c-mode-map (kbd "C-c C-c") 'execute-extended-command)
+(define-key c-mode-map (kbd "C-c c") 'compile)
 
 ;; revive.el
 (add-to-list 'load-path "~/.emacs.d/windows")
@@ -455,6 +451,8 @@
 ;; https://github.com/dkogan/xcscope.el
 ;; TODO : http://www.emacswiki.org/emacs/CScopeAndEmacs
 (require 'xcscope)
+;; close *cscope* buffer automatically
+(setq cscope-close-window-after-select t)
 (cscope-setup)
 
 ;; ctags config
@@ -462,9 +460,36 @@
 ;; TODO : [etags shortcut]
 ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Find-Tag.html#Find-Tag
 
-;; test area
-
 ;; google c, c++ style guide
 (add-to-list 'load-path "~/.emacs.d/google-c-style-guide")
 (require 'google-c-style)
 (add-hook 'c-mode-common-hook 'google-make-newline-indent)
+(define-key c-mode-map (kbd "C-c s o") 'ff-find-other-file)
+
+;; helm
+;; TODO : https://github.com/jixiuf/helm-etags-plus
+(add-to-list 'load-path "~/.emacs.d/helm")
+(require 'helm-config)
+
+
+;; C++
+(defun compile-current-file ()
+  "Compile current c++ file"
+  (interactive)
+  (let ((file-name "")
+        (compile-string ""))
+    (setq file-name (file-name-sans-extension (file-name-nondirectory buffer-file-name)))
+    (setq compile-string
+          (format "g++ -Wall -g -std=c++11 %s -o %s" buffer-file-name file-name))
+    (compile compile-string)))
+
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+(define-key c++-mode-map (kbd "C-c c") 'compile-current-file)
+(define-key c++-mode-map (kbd "C-c C") 'compile)
+(define-key c++-mode-map (kbd "C-c C-c") 'execute-extended-command)
+(define-key c++-mode-map (kbd "C-c s o") 'ff-find-other-file)
+
+
+;; (define-key c++-mode-map (kbd "C-c r") 'compile-and-execute)
+
+;; test area

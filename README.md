@@ -1,7 +1,10 @@
-Emacs 24.3 on Windows 7, Ubuntu 13.10
+Emacs 24.3 on Windows
 ===
 
-2014.03.24
+Last Update - 2014.03.24
+
+By. Anster
+<br>
 
 ### 1. How to use
 
@@ -41,6 +44,13 @@ TODO : Java, Python
 
 
 ### 3. OS dependent config
+
+In case of Windows, You need
+
+- Git bas
+- slime, sbcl
+- cygwin
+
 ```
 (cond
  ((setq os-windows-p (eq system-type 'windows-nt)))
@@ -61,6 +71,18 @@ TODO : Java, Python
 			                     (add-to-list 'load-path "C:/lisp/slime")))
       (os-linux-p (progn (setq inferior-lisp-program "sbcl")
 			                   (load (expand-file-name "~/quicklisp/slime-helper.el")))))	
+;; use cygwin bash instead os MS-DOS on windows
+(if os-windows-p
+    (progn
+      (add-to-list 'load-path "~/.emacs.d/cygwin-mount")
+      (setenv "PATH" (concat "c:/cygwin/bin;" (getenv "PATH")))
+      (setq exec-path (cons "c:/cygwin/bin/" exec-path))
+      (require 'cygwin-mount)
+      (cygwin-mount-activate)
+      (add-hook 'comint-output-filter-functions 'shell-strip-ctrl-m nil t)
+      (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt nil t)
+      (setq explicit-shell-file-name "bash.exe")
+      (setq shell-file-name explicit-shell-file-name)
+      (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
+      (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)))
 ```
-
-By. Anster
