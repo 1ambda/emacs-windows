@@ -606,11 +606,48 @@
                     :foreground "eaeaea"
                     :background "424242")
 
-;; rfringe
-(add-to-list 'load-path "~/.emacs.d/rfringe")
-(require 'rfringe)
 
-;; flycheck
 ;; https://github.com/jedrz/.emacs.d
-;; (add-to-list 'load-path "~/.emacs.d/init")
-;; (require 'setup-flycheck)
+
+;; flymake
+(require 'flymake)
+
+(defun flymake-cc-init ()
+  (let* ((temp-file   (flymake-init-create-temp-buffer-copy
+                       'flymake-create-temp-inplace))
+         (local-file  (file-relative-name
+                       temp-file
+                       (file-name-directory buffer-file-name))))
+    (list "g++" (list "-std=c++11" "-Wall" "-Wextra" "-fsyntax-only" local-file))))
+
+(push '("\\.cpp$" flymake-cc-init) flymake-allowed-file-name-masks)
+
+(add-hook 'c++-mode-hook
+          '(lambda ()
+             (flymake-mode t)))
+
+(defvar my:flymake-minor-mode-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "C-c d p") 'flymake-goto-prev-error)
+    (define-key map (kbd "C-c d n") 'flymake-goto-prev-error)
+    (define-key map (kbd "C-c d e") 'flymake-display-err-menu-for-current-line)
+    (define-key map (kbd "C-c d c") 'flymake-start-syntax-check)
+    map)
+  "Keymap for my flymake minor mode.")
+
+(define-minor-mode my:flymake-minor-mode
+  "Simple minor mode which adds some key bindings for moving to the next and previous errors.
+
+Key bindings:
+
+\\{my:flymake-minor-mode-map}"
+  nil
+  nil
+  :keymap my:flymake-minor-mode-map)
+
+(add-hook 'c++-mode-hook 'my:flymake-minor-mode)
+
+;; ignore flymake message
+(defun flymake-display-warning (warning) 
+  "Display a warning to the user, using lwarn"
+  (message warning))
