@@ -462,8 +462,8 @@
   (let ((file-name "")
         (compile-string ""))
     (setq file-name (file-name-sans-extension (file-name-nondirectory buffer-file-name)))
-    (setq compile-string
-          (format "g++ -Wall -g -std=c++11 %s -o %s" buffer-file-name file-name))
+    ;; (setq compile-string
+    ;;       (format "g++ -Wall -g -std=c++11 %s -o %s" buffer-file-name file-name))
     (compile compile-string)))
 
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
@@ -513,28 +513,30 @@
 
 ;; auto-complete-clang
 ;; we need cygwin-clang
-(add-to-list 'load-path "~/.emacs.d/auto-complete-clang")
-(require 'auto-complete-clang)
-(defun my-ac-config ()
-  (add-hook 'c-mode-common-hook 'ac-cc-mode-setup))
-(defun my-ac-cc-mode-setup ()
-  (setq ac-sources (append '(ac-source-clang) ac-sources))
-  (add-hook 'c-mode-common-hook 'ac-cc-mode-setup))
-(add-hook 'c-mode-common-hook 'my-ac-cc-mode-setup)
-(my-ac-config)
+;; (add-to-list 'load-path "~/.emacs.d/auto-complete-clang")
+;; (require 'auto-complete-clang)
+;; (defun my-ac-config ()
+;;   (add-hook 'c-mode-common-hook 'ac-cc-mode-setup))
+;; (defun my-ac-cc-mode-setup ()
+;;   (setq ac-sources (append '(ac-source-clang) ac-sources))
+;;   (add-hook 'c-mode-common-hook 'ac-cc-mode-setup))
+;; (add-hook 'c-mode-common-hook 'my-ac-cc-mode-setup)
+;; (my-ac-config)
 
-(when cygwin-installed-p
-  (setq ac-clang-flags
-        (mapcar (lambda (item)(concat "-I" item))
-                (split-string
-                 "
-/usr/lib/gcc/i686-pc-cygwin/4.8.2/include/c++
-/usr/lib/gcc/i686-pc-cygwin/4.8.2/include/c++/i686-pc-cygwin
-/usr/lib/gcc/i686-pc-cygwin/4.8.2/include/c++/backward
-/usr/lib/gcc/i686-pc-cygwin/4.8.2/include
-/usr/lib/gcc/i686-pc-cygwin/4.8.2/include-fixed
-/usr/include
-"))))
+;; (when cygwin-installed-p
+;;   (setq ac-clang-flags
+;;         (mapcar (lambda (item)(concat "-I" item))
+;;                 (split-string
+;;                  "
+;; /usr/lib/gcc/i686-pc-cygwin/4.8.2/include/c++
+;; /usr/lib/gcc/i686-pc-cygwin/4.8.2/include/c++/i686-pc-cygwin
+;; /usr/lib/gcc/i686-pc-cygwin/4.8.2/include/c++/backward
+;; /usr/lib/gcc/i686-pc-cygwin/4.8.2/include
+;; /usr/lib/gcc/i686-pc-cygwin/4.8.2/include-fixed
+;; /usr/include
+;; src
+;; ")))
+;;   (message (format "%s" ac-clang-flags)))
 
 ;; xcscope
 ;; https://github.com/dkogan/xcscope.el
@@ -610,6 +612,7 @@
 ;; https://github.com/jedrz/.emacs.d
 
 ;; flymake
+;; https://gist.github.com/mooz/1493649
 (require 'flymake)
 
 (defun flymake-cc-init ()
@@ -622,16 +625,20 @@
 
 (push '("\\.cpp$" flymake-cc-init) flymake-allowed-file-name-masks)
 (push '("\\.h$" flymake-cc-init) flymake-allowed-file-name-masks)
+<<<<<<< HEAD
 
 (add-hook 'c++-mode-hook
           '(lambda ()
              (flymake-mode t)))
+=======
+(add-hook 'c++-mode-hook 'flymake-mode)
+>>>>>>> 9e59980c2819281acdbe05241e8c710db6ded6bb
 
 (defvar my:flymake-minor-mode-map
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "C-c d p") 'flymake-goto-prev-error)
-    (define-key map (kbd "C-c d n") 'flymake-goto-prev-error)
-    (define-key map (kbd "C-c d e") 'flymake-display-err-menu-for-current-line)
+    (define-key map (kbd "C-c d n") 'flymake-goto-next-error)
+    (define-key map (kbd "C-c d i") 'flymake-display-err-menu-for-current-line)
     (define-key map (kbd "C-c d c") 'flymake-start-syntax-check)
     map)
   "Keymap for my flymake minor mode.")
