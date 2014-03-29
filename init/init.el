@@ -513,30 +513,30 @@
 
 ;; auto-complete-clang
 ;; we need cygwin-clang
-(add-to-list 'load-path "~/.emacs.d/auto-complete-clang")
-(require 'auto-complete-clang)
-(defun my-ac-config ()
-  (add-hook 'c-mode-common-hook 'ac-cc-mode-setup))
-(defun my-ac-cc-mode-setup ()
-  (setq ac-sources (append '(ac-source-clang) ac-sources))
-  (add-hook 'c-mode-common-hook 'ac-cc-mode-setup))
-(add-hook 'c-mode-common-hook 'my-ac-cc-mode-setup)
-(my-ac-config)
+;; (add-to-list 'load-path "~/.emacs.d/auto-complete-clang")
+;; (require 'auto-complete-clang)
+;; (defun my-ac-config ()
+;;   (add-hook 'c-mode-common-hook 'ac-cc-mode-setup))
+;; (defun my-ac-cc-mode-setup ()
+;;   (setq ac-sources (append '(ac-source-clang) ac-sources))
+;;   (add-hook 'c-mode-common-hook 'ac-cc-mode-setup))
+;; (add-hook 'c-mode-common-hook 'my-ac-cc-mode-setup)
+;; (my-ac-config)
 
-(when cygwin-installed-p
-  (setq ac-clang-flags
-        (mapcar (lambda (item)(concat "-I" item))
-                (split-string
-                 "
-/usr/lib/gcc/i686-pc-cygwin/4.8.2/include/c++
-/usr/lib/gcc/i686-pc-cygwin/4.8.2/include/c++/i686-pc-cygwin
-/usr/lib/gcc/i686-pc-cygwin/4.8.2/include/c++/backward
-/usr/lib/gcc/i686-pc-cygwin/4.8.2/include
-/usr/lib/gcc/i686-pc-cygwin/4.8.2/include-fixed
-/usr/include
-src
-")))
-  (message (format "%s" ac-clang-flags)))
+;; (when cygwin-installed-p
+;;   (setq ac-clang-flags
+;;         (mapcar (lambda (item)(concat "-I" item))
+;;                 (split-string
+;;                  "
+;; /usr/lib/gcc/i686-pc-cygwin/4.8.2/include/c++
+;; /usr/lib/gcc/i686-pc-cygwin/4.8.2/include/c++/i686-pc-cygwin
+;; /usr/lib/gcc/i686-pc-cygwin/4.8.2/include/c++/backward
+;; /usr/lib/gcc/i686-pc-cygwin/4.8.2/include
+;; /usr/lib/gcc/i686-pc-cygwin/4.8.2/include-fixed
+;; /usr/include
+;; src
+;; ")))
+;;   (message (format "%s" ac-clang-flags)))
 
 ;; xcscope
 ;; https://github.com/dkogan/xcscope.el
@@ -612,6 +612,7 @@ src
 ;; https://github.com/jedrz/.emacs.d
 
 ;; flymake
+;; https://gist.github.com/mooz/1493649
 (require 'flymake)
 
 (defun flymake-cc-init ()
