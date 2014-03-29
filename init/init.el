@@ -621,6 +621,7 @@
     (list "g++" (list "-std=c++11" "-Wall" "-Wextra" "-fsyntax-only" local-file))))
 
 (push '("\\.cpp$" flymake-cc-init) flymake-allowed-file-name-masks)
+(push '("\\.h$" flymake-cc-init) flymake-allowed-file-name-masks)
 
 (add-hook 'c++-mode-hook
           '(lambda ()
