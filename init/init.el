@@ -414,7 +414,7 @@
       '((java-mode . "java") (c++-mode . "stroustrup") (other . "k&r")))
 
 ;; google c, c++ style guide
-(add-to-list 'load-path "~/.emacs.d/google-c-style-guide")
+;; (add-to-list 'load-path "~/.emacs.d/google-c-style-guide")
 ;; (require 'google-c-style)
 ;; (add-hook 'c-mode-common-hook 'google-set-c-style)
 ;; (add-hook 'c-mode-common-hook 'google-make-newline-indent)
@@ -614,6 +614,7 @@
 ;; flymake
 ;; https://gist.github.com/mooz/1493649
 (require 'flymake)
+(setq flymake-gui-warnings-enabled nil)
 
 (defun flymake-cc-init ()
   (let* ((temp-file   (flymake-init-create-temp-buffer-copy
@@ -625,14 +626,8 @@
 
 (push '("\\.cpp$" flymake-cc-init) flymake-allowed-file-name-masks)
 (push '("\\.h$" flymake-cc-init) flymake-allowed-file-name-masks)
-<<<<<<< HEAD
 
-(add-hook 'c++-mode-hook
-          '(lambda ()
-             (flymake-mode t)))
-=======
 (add-hook 'c++-mode-hook 'flymake-mode)
->>>>>>> 9e59980c2819281acdbe05241e8c710db6ded6bb
 
 (defvar my:flymake-minor-mode-map
   (let ((map (make-sparse-keymap)))
