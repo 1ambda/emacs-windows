@@ -414,10 +414,10 @@
       '((java-mode . "java") (c++-mode . "stroustrup") (other . "k&r")))
 
 ;; google c, c++ style guide
-;; (add-to-list 'load-path "~/.emacs.d/google-c-style-guide")
-;; (require 'google-c-style)
-;; (add-hook 'c-mode-common-hook 'google-set-c-style)
-;; (add-hook 'c-mode-common-hook 'google-make-newline-indent)
+(add-to-list 'load-path "~/.emacs.d/google-c-style")
+(require 'google-c-style)
+(add-hook 'c-mode-common-hook 'google-set-c-style)
+(add-hook 'c-mode-common-hook 'google-make-newline-indent)
 (setq-default c-basic-offset 4)
 
 ;; C
@@ -432,6 +432,8 @@
 (add-hook 'slime-repl-mode-hook
           (lambda ()
             (smartparens-mode -1)))
+;; (setf sp-autoescape-string-quote nil) ;; no auto-escape
+;; (sp-pair "^" "^" :actions '(insert autoskip navigate))
 
 (sp-local-pair 'c++-mode
                "{" nil :post-handlers
@@ -654,3 +656,8 @@ Key bindings:
 (defun flymake-display-warning (warning) 
   "Display a warning to the user, using lwarn"
   (message warning))
+
+;; column maker
+(add-to-list 'load-path "~/.emacs.d/column-marker")
+(require 'column-marker)
+(add-hook 'c++-mode-hook (lambda () (interactive) (column-marker-1 80)))

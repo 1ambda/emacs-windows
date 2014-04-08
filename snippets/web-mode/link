@@ -1,0 +1,4 @@
+# name: link
+# key: link
+# --
+<link rel="stylesheet" href="$1"/>
