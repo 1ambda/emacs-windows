@@ -8,7 +8,6 @@
            (file-directory-p "C:/cygwin"))
   (setq cygwin-installed-p t))
 
-
 ;; language
 ;; http://terzeron.net/wiki/doku.php?id=emacs_%EC%84%A4%EC%A0%95
 (when enable-multibyte-characters
@@ -36,6 +35,7 @@
              '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (setq package-enable-at-startup nil)
 (package-initialize)
+
 
 ;; initialize
 (iswitchb-mode)
@@ -83,7 +83,6 @@
 		  (end-of-line)
 		  (point))))
     (comment-or-uncomment-region start end)))
-
 (global-set-key (kbd "C-/") 'comment-eclipse)
 
 ;; custom key setting using "C-c"
@@ -119,8 +118,6 @@
 (add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-decoration-mode)
 
-
-
 ;; cedet semantic
 (semantic-mode 1)
 (require 'semantic/ia)
@@ -146,11 +143,15 @@
 (define-key ecb-mode-map (kbd "M-0") 'ecb-goto-window-edit1)
 (define-key ecb-mode-map (kbd "C-c w") 'ecb-toggle-ecb-windows)
 
-
 ;; evil
 (add-to-list 'load-path "~/.emacs.d/evil") ;;no need with 24
 (require 'evil)
 (evil-mode 1)
+
+;; undo-tree
+;; http://ergoemacs.org/emacs/emacs_best_redo_mode.html
+(require 'undo-tree)
+(global-undo-tree-mode 1)
 
 ;; ido
 (require 'ido)
@@ -379,9 +380,7 @@
 (add-hook 'after-init-hook
           (lambda ()
             (if google-drive-installed-p
-                (switch-to-buffer (find-file "~/Google/TODO")))))
-
-
+                (switch-to-buffer (find-file "~/Google/TODO/TODO.org")))))
 
 ;; use cygwin bash instead os MS-DOS on windows
 (if cygwin-installed-p
@@ -589,29 +588,6 @@
 ;; disable stickyfunc mode
 (global-semantic-stickyfunc-mode -1)
 
-;; theme
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(add-to-list 'load-path "~/.emacs.d/themes")
-(require 'tomorrow-night-bright-theme)
-
-;; power line
-(add-to-list 'load-path "~/.emacs.d/powerline")
-(require 'powerline)
-(powerline-default-theme)
-
-;; (set-face-attribute 'mode-line nil
-;;                     :foreground "white"
-;;                     :background "steelblue"
-;;                     :box nil)
-;; (set-face-attribute 'mode-line-inactive nil
-;;                     :box nil)
-
-(set-face-attribute 'highlight nil
-                    :foreground "eaeaea"
-                    :background "424242")
-
-
-;; https://github.com/jedrz/.emacs.d
 
 ;; flymake
 ;; https://gist.github.com/mooz/1493649
@@ -661,3 +637,24 @@ Key bindings:
 (add-to-list 'load-path "~/.emacs.d/column-marker")
 (require 'column-marker)
 (add-hook 'c++-mode-hook (lambda () (interactive) (column-marker-1 80)))
+
+;; org-mode
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(add-to-list 'auto-mode-alist '("\\.todo$" . org-mode))
+
+;; theme
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(add-to-list 'load-path "~/.emacs.d/themes")
+(require 'brin-theme)
+
+;; power line
+(add-to-list 'load-path "~/.emacs.d/powerline")
+(require 'powerline)
+(powerline-default-theme)
+
+;; (set-face-attribute 'highlight nil
+;;                     :foreground "eaeaea"
+;;                     :background "424242")
+
+;; https://github.com/jedrz/.emacs.d
+
