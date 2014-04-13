@@ -319,6 +319,7 @@
 
 ;; js3-mode
 
+(require 'js3-mode)
 (add-to-list 'ac-modes 'js3-mode)
 (custom-set-variables
  '(js3-lazy-operators t)
@@ -332,6 +333,7 @@
  '(js3-enter-indents-newline t)
  '(js3-indent-on-enter-key t)
  '(js3-consistent-level-indent-inner-bracket t))
+
 
 ;; web-mode.el
 ;; http://web-mode.org/
@@ -437,6 +439,11 @@
 (sp-local-pair 'c++-mode
                "{" nil :post-handlers
                '((my-create-newline-and-enter-sexp "RET")))
+
+(sp-local-pair 'js3-mode
+               "{" nil :post-handlers
+               '((my-create-newline-and-enter-sexp "RET")))
+
 
 (defun my-create-newline-and-enter-sexp (&rest _ignored)
   (newline)
@@ -645,16 +652,16 @@ Key bindings:
 ;; theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (add-to-list 'load-path "~/.emacs.d/themes")
-(require 'brin-theme)
+(require 'tomorrow-night-bright-theme)
 
 ;; power line
 (add-to-list 'load-path "~/.emacs.d/powerline")
 (require 'powerline)
 (powerline-default-theme)
 
-;; (set-face-attribute 'highlight nil
-;;                     :foreground "eaeaea"
-;;                     :background "424242")
+(set-face-attribute 'highlight nil
+                    :foreground "eaeaea"
+                    :background "424242")
 
 ;; https://github.com/jedrz/.emacs.d
 
