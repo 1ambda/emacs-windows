@@ -10,23 +10,19 @@
 
 ;; language
 ;; http://terzeron.net/wiki/doku.php?id=emacs_%EC%84%A4%EC%A0%95
-(when enable-multibyte-characters
-  (set-language-environment "Korean")
-  (setq locale-value 
-        (if (string= (getenv "LANG") "ko_KR.utf8") 'utf-8 'euc-kr))
-  (prefer-coding-system locale-value)
-  (set-default-coding-systems locale-value)
-  (setq-default file-name-coding-system locale-value)
-  (setq-default locale-coding-system locale-value)
-  (set-terminal-coding-system locale-value)
-  (set-keyboard-coding-system locale-value)
-  (set-selection-coding-system locale-value)
-  (setq-default buffer-file-coding-system locale-value)
-  (setq-default buffer-coding-system locale-value)
-  (setq file-coding-system locale-value)
-  (setq terminal-coding-system locale-value)
-  (setq shell-coding-system locale-value)
-)
+(setq locale-value 'utf-8)
+(prefer-coding-system locale-value)
+(set-default-coding-systems locale-value)
+(setq-default file-name-coding-system locale-value)
+(setq-default locale-coding-system locale-value)
+(set-terminal-coding-system locale-value)
+(set-keyboard-coding-system locale-value)
+(set-selection-coding-system locale-value)
+(setq-default buffer-file-coding-system locale-value)
+(setq-default buffer-coding-system locale-value)
+(setq file-coding-system locale-value)
+(setq terminal-coding-system locale-value)
+(setq shell-coding-system locale-value)
 ;; package
 (require 'package)
 (add-to-list 'package-archives
@@ -381,8 +377,8 @@
 ;; load TODO in google drive after initializing Emacs
 (add-hook 'after-init-hook
           (lambda ()
-            (if google-drive-installed-p
-                (switch-to-buffer (find-file "~/Google/TODO/TODO.org")))))
+            (if (file-directory-p "C:/Users/Razenrote/Dropbox/Todo")
+                (switch-to-buffer (find-file "C:/Users/Razenrote/Dropbox/Todo/List.org")))))
 
 ;; use cygwin bash instead os MS-DOS on windows
 (if cygwin-installed-p
@@ -665,3 +661,29 @@ Key bindings:
 
 ;; https://github.com/jedrz/.emacs.d
 
+;; ace-jump-mode
+(autoload
+  'ace-jump-mode
+  "ace-jump-mode"
+  t)
+;; you can select the key you prefer to
+(define-key global-map (kbd "C-x SPC") 'ace-jump-mode)
+
+;; 
+;; enable a more powerful jump back function from ace jump mode
+;;
+(autoload
+  'ace-jump-mode-pop-mark
+  "ace-jump-mode"
+  t)
+
+(eval-after-load "ace-jump-mode"
+  '(ace-jump-mode-enable-mark-sync))
+
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode-pop-mark)
+
+;;If you use evil
+(define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
+
+;; Use <kana> key as toggle of input methof
+(global-set-key (kbd "<kana>") 'toggle-input-method)
