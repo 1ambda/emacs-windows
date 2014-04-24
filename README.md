@@ -30,6 +30,12 @@ TODO : Java, Python
 - emmet-mode
 - web-mode
 - ido
+	* ido-at-point
+	* ido-vertical-mode
+	* flx-ido
+	* ido-goto-symbol
+- expand-region
+- ace-jump-mode
 - windmove
 - windows
 - revive
