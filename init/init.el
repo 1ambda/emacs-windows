@@ -1,4 +1,4 @@
-;; location variable
+;; location variables
 (cond
  ((setq os-windows-p (eq system-type 'windows-nt)))
  ((setq os-linux-p (eq system-type 'gnu/linux)))
@@ -143,6 +143,8 @@
 (add-to-list 'load-path "~/.emacs.d/evil") ;;no need with 24
 (require 'evil)
 (evil-mode 1)
+(setq w32-enable-caps-lock nil)
+(global-set-key [capslock] 'evil-force-normal-state)
 
 ;; undo-tree : C-x u
 ;; http://ergoemacs.org/emacs/emacs_best_redo_mode.html
@@ -760,3 +762,31 @@ Key bindings:
                         (string= (car imenu--rescan-item) name))
               (add-to-list 'symbol-names name)
               (add-to-list 'name-and-pos (cons name position))))))))
+
+
+;; recentf with ido : [C-c f]
+(require 'recentf)
+(recentf-mode 1)
+(setq recentf-max-menu-items 25)
+
+(global-set-key (kbd "C-c f") 'recentf-ido-find-file)
+
+(defun recentf-ido-find-file ()
+  "Find a recent file using Ido."
+  (interactive)
+  (let* ((file-assoc-list
+	  (mapcar (lambda (x)
+		    (cons (file-name-nondirectory x)
+			  x))
+		  recentf-list))
+	 (filename-list
+	  (remove-duplicates (mapcar #'car file-assoc-list)
+			     :test #'string=))
+	 (filename (ido-completing-read "Choose recent file: "
+					filename-list
+					nil
+					t)))
+    (when filename
+      (find-file (cdr (assoc filename
+			     file-assoc-list))))))
+
