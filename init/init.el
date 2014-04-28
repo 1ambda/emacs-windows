@@ -801,3 +801,18 @@ Key bindings:
 ;; buffcycle
 (add-to-list 'load-path "~/.emacs.d/buffcycle")
 (require 'buffcycle)
+
+;; ido uniquify
+(require 'uniquify) 
+(setq uniquify-buffer-name-style 'reverse)
+(setq uniquify-separator "/")
+(setq uniquify-after-kill-buffer-p t) ; rename after killing uniquified
+(setq uniquify-ignore-buffers-re "^\\*") ; don't muck with special buffers
+
+;; smex
+(require 'smex)
+(smex-initialize)
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+
