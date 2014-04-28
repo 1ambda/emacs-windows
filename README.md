@@ -52,6 +52,8 @@ TODO : Java, Python
 - powerline
 - header2
 - member-functions
+- windcycle
+- buffcycle
 
 
 ### 3. OS dependent config

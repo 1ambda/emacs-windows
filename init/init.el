@@ -793,4 +793,11 @@ Key bindings:
 ;; helm
 (require 'helm-config)
 (global-set-key (kbd "C-c h") 'helm-mini)
-(helm-mode 1)
+
+;; windcycle
+(add-to-list 'load-path "~/.emacs.d/windcycle")
+(require 'windcycle)
+
+;; buffcycle
+(add-to-list 'load-path "~/.emacs.d/buffcycle")
+(require 'buffcycle)
