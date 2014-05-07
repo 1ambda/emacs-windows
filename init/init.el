@@ -4,9 +4,10 @@
  ((setq os-linux-p (eq system-type 'gnu/linux)))
  ((setq os-mac-p (eq-system-type 'darwin))))
 
-(when (and os-windows-p
+(if (and os-windows-p
            (file-directory-p "C:/cygwin"))
-  (setq cygwin-installed-p t))
+    (setq cygwin-installed-p t)
+  (setq cygwin-installed-p nil))
 
 ;; language
 ;; http://terzeron.net/wiki/doku.php?id=emacs_%EC%84%A4%EC%A0%95
@@ -83,7 +84,6 @@
 
 ;; custom key setting using "C-c"
 ;; use C-c C-c instead of M-x. It would be easier.
-(global-set-key (kbd "C-c C-c") 'execute-extended-command)
 (global-set-key (kbd "C-c S") 'create-custom-snippet)        ;; create snippet of current mode
 (global-set-key (kbd "C-c R") 'reload-current-mode-snippets) ;; loading all snippets
 (global-set-key (kbd "C-c e")
@@ -385,11 +385,6 @@
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 
-;; google drive sync
-(defvar google-drive-installed-p nil)
-(if (file-directory-p "~/Google")
-    (setq google-drive-installed-p t))
-
 ;; load TODO in google drive after initializing Emacs
 (add-hook 'after-init-hook
           (lambda ()
@@ -414,10 +409,9 @@
 
 ;; M-x == C-c C-c
 ;; in case of C, C++ mode We have to override the key binding
-(add-hook 'eshell-mode-hook 
-          (lambda ()
-            (define-key eshell-mode-map (kbd "C-c C-c") 'execute-extended-command)))
-(define-key compilation-mode-map (kbd "C-c C-c") 'execute-extended-command)
+;; (add-hook 'eshell-mode-hook 
+;;   (lambda ()
+;;     (define-key compilation-mode-map (kbd "C-c C-c") 'execute-extended-command)))
 
 
 
