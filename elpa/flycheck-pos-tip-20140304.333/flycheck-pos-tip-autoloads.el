@@ -4,7 +4,7 @@
 
 
 ;;;### (autoloads (flycheck-pos-tip-error-messages) "flycheck-pos-tip"
-;;;;;;  "flycheck-pos-tip.el" (21301 33610 0 0))
+;;;;;;  "flycheck-pos-tip.el" (21355 8625 0 0))
 ;;; Generated autoloads from flycheck-pos-tip.el
 
 (autoload 'flycheck-pos-tip-error-messages "flycheck-pos-tip" "\
@@ -18,8 +18,8 @@ lines, and display them with `pos-tip-show-no-propertize', which shows
 
 ;;;***
 
-;;;### (autoloads nil nil ("flycheck-pos-tip-pkg.el") (21301 33610
-;;;;;;  906000 0))
+;;;### (autoloads nil nil ("flycheck-pos-tip-pkg.el") (21355 8625
+;;;;;;  797000 0))
 
 ;;;***
 

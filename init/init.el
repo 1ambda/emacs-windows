@@ -1,3 +1,5 @@
+
+
 ;; location variables
 (cond
  ((setq os-windows-p (eq system-type 'windows-nt)))
@@ -8,6 +10,15 @@
            (file-directory-p "C:/cygwin"))
     (setq cygwin-installed-p t)
   (setq cygwin-installed-p nil))
+
+;; set font
+(set-face-font 'default "Bitstream Vera Sans Mono")
+
+;; theme
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(add-to-list 'load-path "~/.emacs.d/themes")
+(require 'tomorrow-night-bright-theme)
+
 
 ;; language
 ;; http://terzeron.net/wiki/doku.php?id=emacs_%EC%84%A4%EC%A0%95
@@ -655,10 +666,6 @@ Key bindings:
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (add-to-list 'auto-mode-alist '("\\.todo$" . org-mode))
 
-;; theme
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(add-to-list 'load-path "~/.emacs.d/themes")
-(require 'tomorrow-night-bright-theme)
 
 ;; power line
 (add-to-list 'load-path "~/.emacs.d/powerline")

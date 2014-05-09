@@ -1,0 +1,10 @@
+;;;; Emacs Bookmark Format Version 1 ;;;;
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("working"
+ (filename . "c:/github/planner-collector/cert-list/internship.js")
+ (front-context-string . "g\n\n            /")
+ (rear-context-string . "       // Workin")
+ (position . 7133))
+)
