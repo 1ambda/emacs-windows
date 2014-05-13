@@ -591,9 +591,8 @@
 
 
 ;; iedit
-;; (add-to-list 'load-path "~/.emacs.d/iedit")
-;; (require 'iedit)
-;; (global-set-key (kbd "C-c ;") 'iedit-mode)
+(require 'iedit)
+(global-set-key (kbd "C-c ;") 'iedit-mode)
 
 ;; member-function
 (add-to-list 'load-path "~/.emacs.d/member-function")
@@ -816,4 +815,10 @@ Key bindings:
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+
+(define-key evil-insert-state-map (kbd "C-k") nil)
+
+;; tramp
+(require 'tramp)
+(setq tramp-default-method "ssh")
 
