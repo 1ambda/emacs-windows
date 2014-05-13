@@ -1,8 +1,14 @@
 # Emacs 24.3 on Windows
 
-Last Update - 2014.05.13
+#### Last Update - 2014.05.13
 
-By. Anster
+#### Todo
+
+1. Encoding
+2. setup-custom functions
+3. other packages
+4. javascript / node.js / HTML / CSS support
+
 
 <br/>
 ### 1. How to use
