@@ -1,4 +1,0 @@
-# name: prf
-# key: prf
-# --
-printf("$1"$2);

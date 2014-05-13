@@ -1,4 +1,0 @@
-# name: require
-# key: req
-# --
-var $1 = require('$1');

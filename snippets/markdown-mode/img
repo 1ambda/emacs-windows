@@ -1,4 +1,0 @@
-# name: img-center
-# key: img
-# --
-<img class="img-responsive img-center h-p-20" src="$1">
